@@ -1,28 +1,28 @@
-# <center> 欢迎来到Alpha版本，Rana分支，感谢您的贡献！</center>
+<div align=center>
+![Icon](git_img/CipherTools_NameIco.svg)
 
-## <center>瑞士军刀</center>
+## <center>Cipher Tools（原名瑞士军刀） x Rana Toolkit</center>
+<p align="center">
+<a href="https://ct.ne0w0r1d.top">官方文档</a>
+</p>
+### Cipher Tools 简介
 
-<center><a href="https://armyknife.ne0w0r1d.top">官方文档</a></center>
+这是一个在 [Yumeyo 开发的 NetInfoChecker 网络综合查询器（e语言版）](https://github.com/Yumeyo23/NetInfoChecker)为灵感的
+在 Qt6 进行实现的集网络信息、WOL唤醒、NAT 检测、游戏 IP 和全球网测延迟检测、路由跟踪为一身的超级工具
+与此同时，原作者正在使用 .NET 4 重构开发 WinForm 版本的 [NetInfoCheckerX](https://github.com/Yumeyo23/NetInfoCheckerX)，其目的是为了兼容旧设备
+本软件设计之初就是为了现代 X86_64 和跨平台而生（但 QtWidget 真现代吗？未来可能研究一下 QML！）
 
-### Army Knife简介
+### 中文翻译明明是密码？为什么用其作为名字呢？而为什么子项目 Rana Toolkit 要叫 Rana 呢？
 
-> 这是一个在 Yumeyo开发的NetInfoChecker 网络综合查询器（e语言版）为灵感的，基于其功能与Qt6开发的集网络信息、WOL唤醒、NAT（网络地址转换等级）检测、游戏IP和全球网测延迟检测、路由跟踪为一身的超级工具<br>
+名字取自于《崩坏：星穹铁道》的[赛飞儿]https://mzh.moegirl.org.cn/%E8%B5%9B%E9%A3%9E%E5%84%BF)，啊没错就是那只猫娘
+而 Rana Toolkit 的 Rana 则取自于 《BanG Dream！It's MyGO！！！！！》的[要乐奈](https://mzh.moegirl.org.cn/%E8%A6%81%E4%B9%90%E5%A5%88)
+Rana Toolkit 项目[传送门](/Ne0W0r1d/Rana_Toolkit)
 
-## Qt版本截图
+## 预览截图
 
 ![Home](git_img/sc.png)<br>
 
 <center>主页</center>
-
-# 重构Timeline
-
-## 重构原因
-
-- e语言容易被杀毒软件、反作弊等安全类型软件一秒六棍
-- Qt内置网络库，可以实现80% NetInfoChecker 的功能
-- 基于QWidget，可以为Windows、Mac、Linux进行一次开发多端部署
-    - ~~不排除未来用Qt Quick和转向Flutter~~
-- 为了未来的可扩展性和移植性
 
 ## TO-DO LIST
 
@@ -35,7 +35,7 @@
 - [ ] 设备信息实现(Beta)<br>
 - [ ] 全新UI（NXT-Stable）<br>
 
-## Army Knife（Qt）主要分支
+## CipherTools 主要分支
 
 > 开发代号将使用《BanG Dream! It's MyGO!!!!! & Ave Mujica》以及《绝区零》的角色作为开发代号<br>
 
