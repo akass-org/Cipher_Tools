@@ -52,7 +52,12 @@ Rana Toolkit 项目[传送门请前往](#rana-toolkit-传送门)<br>
 | **Astra（耀嘉音）** | **0.4_AKTools.astra.alpha.[builddate]** | **Alpha-Re-工具** |
 
 ## Rana Toolkit 传送门
+
 [Github](https://github.com/Ne0W0r1d/Rana_Toolkit)
 [Codeberg](https://codeberg.org/Ne0W0r1d/Rana_ToolKit)
 [Gitee](https://gitee.com/Ne0W0r1d/Rana_Toolkit)
 [CNB](https://github.com/Ne0W0r1d/Rana_Toolkit)
+
+## AIGC 相关
+
+本项目含有部分 AIGC 代码，但本人会经过测试实验并因此学习改进
