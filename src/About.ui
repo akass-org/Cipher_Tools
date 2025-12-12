@@ -6,53 +6,18 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>302</height>
+    <width>628</width>
+    <height>233</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>关于 Cipher Tools</string>
   </property>
-  <widget class="QLabel" name="softname">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>201</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>20</pointsize>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Cipher Tools </string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="qtver">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>230</y>
-     <width>81</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>基于Qt 6构建</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="inspried">
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>270</y>
+     <x>390</x>
+     <y>180</y>
      <width>221</width>
      <height>20</height>
     </rect>
@@ -67,14 +32,14 @@
   <widget class="QLabel" name="oss_license">
    <property name="geometry">
     <rect>
-     <x>210</x>
-     <y>250</y>
-     <width>171</width>
+     <x>360</x>
+     <y>200</y>
+     <width>251</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>本软件采用LGPL 3开源许可</string>
+    <string>本软件基于 Qt，使用技术栈同 LGPL 3开源</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
@@ -83,8 +48,8 @@
   <widget class="QLabel" name="qticon">
    <property name="geometry">
     <rect>
-     <x>330</x>
-     <y>190</y>
+     <x>560</x>
+     <y>140</y>
      <width>50</width>
      <height>35</height>
     </rect>
@@ -112,7 +77,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>140</y>
+     <y>100</y>
      <width>91</width>
      <height>19</height>
     </rect>
@@ -125,7 +90,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>160</y>
+     <y>120</y>
      <width>361</width>
      <height>19</height>
     </rect>
@@ -138,7 +103,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>60</y>
+     <y>20</y>
      <width>61</width>
      <height>19</height>
     </rect>
@@ -151,7 +116,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>80</y>
+     <y>40</y>
      <width>361</width>
      <height>19</height>
     </rect>
@@ -164,7 +129,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>120</y>
+     <y>80</y>
      <width>361</width>
      <height>19</height>
     </rect>
@@ -177,7 +142,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>100</y>
+     <y>60</y>
      <width>81</width>
      <height>19</height>
     </rect>
@@ -190,13 +155,44 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>260</y>
+     <y>190</y>
      <width>86</width>
      <height>26</height>
     </rect>
    </property>
    <property name="text">
     <string>关于 Qt</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>10</y>
+     <width>100</width>
+     <height>120</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>100</width>
+     <height>120</height>
+    </size>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="Resource.qrc">:/Resource/CipherTools_NameIco.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
  </widget>

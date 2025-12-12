@@ -18,7 +18,7 @@
 
 名字取自于《崩坏：星穹铁道》的[赛飞儿](https://mzh.moegirl.org.cn/%E8%B5%9B%E9%A3%9E%E5%84%BF)，啊没错就是那只猫娘，~~你也可以理解为是无畏契约的阴暗保安零~~<br>
 而 Rana Toolkit 的 Rana 则取自于 《BanG Dream！It's MyGO！！！！！》的[要乐奈](https://mzh.moegirl.org.cn/%E8%A6%81%E4%B9%90%E5%A5%88)<br>
-Rana Toolkit 项目[传送门](/Ne0W0r1d/Rana_Toolkit)<br>
+Rana Toolkit 项目[传送门请前往](#rana-toolkit-传送门)<br>
 
 ## 预览截图
 
@@ -36,6 +36,7 @@ Rana Toolkit 项目[传送门](/Ne0W0r1d/Rana_Toolkit)<br>
 - [ ] NAT 检测、多出口功能实现(Beta)<br>
 - [ ] 设备信息实现(Beta)<br>
 - [ ] 全新UI（NXT-Stable）<br>
+- [ ] i18n 支持（NXT-Stable)<br>
 
 ## CipherTools 主要分支
 
@@ -49,3 +50,9 @@ Rana Toolkit 项目[传送门](/Ne0W0r1d/Rana_Toolkit)<br>
 | ~~Rana（要乐奈）~~ | ~~0.4.rana.alpha.[builddate]~~ | ~~Alpha-Old，由于炸了Git计划项目分离~~ |
 | **Rana-Re（要乐奈）** | **0.4.rana.alpha.[builddate]** | **Alpha-Re-本体** |
 | **Astra（耀嘉音）** | **0.4_AKTools.astra.alpha.[builddate]** | **Alpha-Re-工具** |
+
+## Rana Toolkit 传送门
+[Github](https://github.com/Ne0W0r1d/Rana_Toolkit)
+[Codeberg](https://codeberg.org/Ne0W0r1d/Rana_ToolKit)
+[Gitee](https://gitee.com/Ne0W0r1d/Rana_Toolkit)
+[CNB](https://github.com/Ne0W0r1d/Rana_Toolkit)

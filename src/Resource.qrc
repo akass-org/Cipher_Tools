@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>Resource/qt.png</file>
+        <file>Resource/CipherTools_Icons.svg</file>
+        <file>Resource/CipherTools_NameIco.png</file>
     </qresource>
 </RCC>

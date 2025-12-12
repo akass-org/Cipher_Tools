@@ -15,14 +15,14 @@
 
 #include "deviceinfo.h"
 #include "ui_deviceinfo.h"
-#include "Home.h"
+// #include "Home.h"
 
 DeviceInfo::DeviceInfo(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::DeviceInfo)
 {
     ui->setupUi(this);
-    // QString kInfo = home::
+
 }
 
 DeviceInfo::~DeviceInfo()
