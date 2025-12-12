@@ -1,0 +1,184 @@
+2025-12-12 21:38:11.129 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:38:11.129 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:38:11.129 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:38:11.129 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:38:11.129 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:38:11.129 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:38:11.129 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:38:11.165 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55a7c8bc7640)
+2025-12-12 21:38:11.165 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55a7c8fd9870)
+2025-12-12 21:38:11.165 [INFO - 信息] 系统环境： "linux" ；系统： "CachyOS" ；系统版本： "unknown"
+2025-12-12 21:38:11.165 [INFO - 信息] 软件版本： "CIPHER.rana.alpha.251129" ；工具箱版本： "RANATOOLKIT.astra.prototype"
+2025-12-12 21:38:11.165 [INFO - 信息] "主机名：" "Ne0-Cyrene"
+2025-12-12 21:38:11.300 [INFO - 信息] ISP: "中国福建厦门 | 电信"
+2025-12-12 21:38:11.300 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55a7c8fe2b90)
+2025-12-12 21:38:11.362 [INFO - 信息] "IPv6 优先"
+2025-12-12 21:38:11.362 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55a7c8fe60d0)
+2025-12-12 21:38:11.399 [INFO - 信息] 公网 IPv6: "240e:379:1eb4:4c00::f31"
+2025-12-12 21:38:11.399 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55a7c8fd9870)
+2025-12-12 21:38:13.142 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:38:13.142 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55a7c8bc7640)
+2025-12-12 21:38:17.847 [DEBUG - 调试] 关于窗口已启动 Fuck About
+2025-12-12 21:38:17.847 [DEBUG - 调试] about(0x55a7c91f72e0, name="about") aboutWidget 已打开，请检查窗口状态
+2025-12-12 21:39:37.606 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:39:37.606 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:39:37.606 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:39:37.606 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:39:37.606 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:39:37.606 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:39:37.606 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:39:37.636 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55555587a170)
+2025-12-12 21:39:37.636 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c88440)
+2025-12-12 21:39:37.637 [INFO - 信息] 系统环境： "linux" ；系统： "CachyOS" ；系统版本： "unknown"
+2025-12-12 21:39:37.637 [INFO - 信息] 软件版本： "CIPHER.rana.alpha.251129" ；工具箱版本： "RANATOOLKIT.astra.prototype"
+2025-12-12 21:39:37.637 [INFO - 信息] "主机名：" "Ne0-Cyrene"
+2025-12-12 21:39:37.787 [INFO - 信息] 公网 IPv6: "240e:379:1eb4:4c00::f31"
+2025-12-12 21:39:37.787 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c88440)
+2025-12-12 21:39:37.810 [INFO - 信息] "IPv6 优先"
+2025-12-12 21:39:37.810 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c97ad0)
+2025-12-12 21:39:39.783 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:39:39.783 [DEBUG - 调试] QNetworkReplyHttpImpl(0x55555587a170)
+2025-12-12 21:39:40.137 [DEBUG - 调试] 关于窗口已启动 Fuck About
+2025-12-12 21:39:40.137 [DEBUG - 调试] about(0x7fffec0126f0, name="about") aboutWidget 已打开，请检查窗口状态
+2025-12-12 21:39:42.856 [INFO - 信息] ISP: "中国香港"
+2025-12-12 21:39:42.856 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c94a70)
+2025-12-12 21:41:27.418 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:41:27.418 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:41:27.418 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:41:27.418 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:41:27.418 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:41:27.418 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:41:27.418 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:41:27.463 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555883b10)
+2025-12-12 21:41:27.464 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555b5a4e0)
+2025-12-12 21:41:27.464 [INFO - 信息] 系统环境： "linux" ；系统： "CachyOS" ；系统版本： "unknown"
+2025-12-12 21:41:27.464 [INFO - 信息] 软件版本： "CIPHER.rana.alpha.251129" ；工具箱版本： "RANATOOLKIT.astra.prototype"
+2025-12-12 21:41:27.464 [INFO - 信息] "主机名：" "Ne0-Cyrene"
+2025-12-12 21:41:29.052 [INFO - 信息] ISP: "中国香港"
+2025-12-12 21:41:29.052 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c98a70)
+2025-12-12 21:41:29.407 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:41:29.407 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555883b10)
+2025-12-12 21:49:45.001 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:49:45.002 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:49:45.002 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:49:45.002 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:49:45.002 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:49:45.002 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:49:45.002 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:49:45.052 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555944560)
+2025-12-12 21:49:45.052 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c9d260)
+2025-12-12 21:49:45.053 [INFO - 信息] 系统环境： "linux" ；系统： "CachyOS" ；系统版本： "unknown"
+2025-12-12 21:49:45.053 [INFO - 信息] 软件版本： "CIPHER.rana.alpha.251129" ；工具箱版本： "RANATOOLKIT.astra.prototype"
+2025-12-12 21:49:45.053 [INFO - 信息] "主机名：" "Ne0-Cyrene"
+2025-12-12 21:49:45.247 [INFO - 信息] 公网 IPv6: "240e:379:1eb4:4c00::f31"
+2025-12-12 21:49:45.247 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c9d260)
+2025-12-12 21:49:45.739 [INFO - 信息] "IPv4 优先"
+2025-12-12 21:49:45.739 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca9b70)
+2025-12-12 21:49:47.042 [DEBUG - 调试] 关于窗口已启动 Fuck About
+2025-12-12 21:49:47.043 [DEBUG - 调试] about(0x555555d9c080, name="about") aboutWidget 已打开，请检查窗口状态
+2025-12-12 21:49:47.333 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:49:47.333 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555944560)
+2025-12-12 21:49:48.160 [INFO - 信息] ISP: "中国香港"
+2025-12-12 21:49:48.160 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca6770)
+2025-12-12 21:50:17.510 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:50:17.510 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:50:17.510 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:50:17.510 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:50:17.510 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:50:17.510 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:50:17.510 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:50:17.556 [DEBUG - 调试] QNetworkReplyHttpImpl(0x5555558900f0)
+2025-12-12 21:50:17.556 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca2c10)
+2025-12-12 21:50:17.556 [INFO - 信息] 系统环境： "linux" ；系统： "CachyOS" ；系统版本： "unknown"
+2025-12-12 21:50:17.556 [INFO - 信息] 软件版本： "CIPHER.rana.alpha.251212" ；工具箱版本： "RANATOOLKIT.astra.prototype"
+2025-12-12 21:50:17.557 [INFO - 信息] "主机名：" "Ne0-Cyrene"
+2025-12-12 21:50:18.399 [INFO - 信息] "IPv4 优先"
+2025-12-12 21:50:18.399 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca8ed0)
+2025-12-12 21:50:18.607 [INFO - 信息] 公网 IPv6: "240e:379:1eb4:4c00::f31"
+2025-12-12 21:50:18.607 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca2c10)
+2025-12-12 21:50:18.773 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:50:18.773 [DEBUG - 调试] QNetworkReplyHttpImpl(0x5555558900f0)
+2025-12-12 21:50:20.001 [INFO - 信息] ISP: "中国香港"
+2025-12-12 21:50:20.001 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca5a10)
+2025-12-12 21:50:23.748 [DEBUG - 调试] 关于窗口已启动 Fuck About
+2025-12-12 21:50:23.749 [DEBUG - 调试] about(0x555555f33c40, name="about") aboutWidget 已打开，请检查窗口状态
+2025-12-12 21:52:25.484 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:52:25.484 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:52:25.484 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:52:25.484 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:52:25.484 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:52:25.484 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:52:25.484 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:52:25.523 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555943980)
+2025-12-12 21:52:25.523 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c9ba30)
+2025-12-12 21:52:25.523 [INFO - 信息] 系统环境： "linux" ；系统： "CachyOS" ；系统版本： "unknown"
+2025-12-12 21:52:25.523 [INFO - 信息] 软件版本： "CIPHER.rana.alpha.251212" ；工具箱版本： "RANATOOLKIT.astra.prototype"
+2025-12-12 21:52:25.523 [INFO - 信息] "主机名：" "Ne0-Cyrene"
+2025-12-12 21:52:25.703 [INFO - 信息] 公网 IPv6: "240e:379:1eb4:4c00::f31"
+2025-12-12 21:52:25.704 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555c9ba30)
+2025-12-12 21:52:25.730 [INFO - 信息] "IPv6 优先"
+2025-12-12 21:52:25.730 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca8450)
+2025-12-12 21:52:26.774 [INFO - 信息] ISP: "中国香港"
+2025-12-12 21:52:26.774 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555ca5300)
+2025-12-12 21:52:27.536 [DEBUG - 调试] 关于窗口已启动 Fuck About
+2025-12-12 21:52:27.536 [DEBUG - 调试] about(0x555555d9ae50, name="about") aboutWidget 已打开，请检查窗口状态
+2025-12-12 21:52:27.865 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:52:27.865 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555943980)
+2025-12-12 21:52:44.024 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:52:44.024 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:52:44.024 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:52:44.024 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:52:44.024 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:52:44.024 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:52:44.024 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:52:44.024 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555d99570)
+2025-12-12 21:52:44.025 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555f9f2d0)
+2025-12-12 21:52:44.129 [INFO - 信息] ISP: "中国福建厦门 | 电信"
+2025-12-12 21:52:44.129 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555fef010)
+2025-12-12 21:52:44.204 [INFO - 信息] 公网 IPv6: "240e:379:1eb4:4c00::f31"
+2025-12-12 21:52:44.204 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555f9f2d0)
+2025-12-12 21:52:44.686 [INFO - 信息] "IPv4 优先"
+2025-12-12 21:52:44.686 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555fc1550)
+2025-12-12 21:52:44.686 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:52:44.686 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555d99570)
+2025-12-12 21:53:08.301 [INFO - 信息] 信息获取/刷新信号已收到，初始化UI并获取信息中
+2025-12-12 21:53:08.301 [DEBUG - 调试] QList(QNetworkInterface(name = "lo", hardware address = "00:00:00:00:00:00", flags = IsUp IsRunning IsLoopBack , entries = QList(address = QHostAddress("127.0.0.1"), netmask = QHostAddress("255.0.0.0"), broadcast = QHostAddress("127.255.255.255"), address = QHostAddress("::1"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")))
+, QNetworkInterface(name = "eno2", hardware address = "58:11:22:E0:22:BC", flags = IsUp CanBroadcast CanMulticast , entries = QList())
+, QNetworkInterface(name = "wlan0", hardware address = "84:7B:57:FA:7D:96", flags = IsUp IsRunning CanBroadcast CanMulticast , entries = QList(address = QHostAddress("192.168.2.7"), netmask = QHostAddress("255.255.255.0"), broadcast = QHostAddress("192.168.2.255"), address = QHostAddress("240e:379:1eb4:4c00::f31"), netmask = QHostAddress("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"), address = QHostAddress("240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"), netmask = QHostAddress("ffff:ffff:ffff:ffff::"), address = QHostAddress("fe80::9239:aa88:b867:39f0%wlan0"), netmask = QHostAddress("ffff:ffff:ffff:ffff::")))
+)
+2025-12-12 21:53:08.301 [INFO - 信息] "84:7B:57:FA:7D:96" "wlan0"
+2025-12-12 21:53:08.301 [DEBUG - 调试] 请检查网络配置喵🐱 false
+2025-12-12 21:53:08.301 [INFO - 信息] 本地IPv4 "192.168.2.7"
+2025-12-12 21:53:08.301 [DEBUG - 调试] 请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵 false
+2025-12-12 21:53:08.301 [INFO - 信息] 本地IPv6： "240e:379:1eb4:4c00:7185:ffcf:b9da:d1d1"
+2025-12-12 21:53:08.301 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555eb06d0)
+2025-12-12 21:53:08.302 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555e4d630)
+2025-12-12 21:53:08.406 [INFO - 信息] ISP: "中国福建厦门 | 电信"
+2025-12-12 21:53:08.406 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555f134a0)
+2025-12-12 21:53:08.444 [INFO - 信息] "IPv6 优先"
+2025-12-12 21:53:08.444 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555faca30)
+2025-12-12 21:53:08.450 [INFO - 信息] 公网 IPv6: "240e:379:1eb4:4c00::f31"
+2025-12-12 21:53:08.450 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555e4d630)
+2025-12-12 21:53:10.797 [INFO - 信息] 公网 IPv4: "117.30.164.239"
+2025-12-12 21:53:10.797 [DEBUG - 调试] QNetworkReplyHttpImpl(0x555555eb06d0)
