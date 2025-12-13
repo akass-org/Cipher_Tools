@@ -1,4 +1,5 @@
 QT       += core gui network
+TARGET = CipherTools
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

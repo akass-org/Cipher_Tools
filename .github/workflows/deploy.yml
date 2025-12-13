@@ -1,0 +1,81 @@
+name: Qt CI Matrix (qmake)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux Qt 6.5 LTS
+          - os: ubuntu-22.04
+            qt: 6.5.3
+            artifact: linux-qt65
+          # Linux Qt 6.10
+          - os: ubuntu-24.04
+            qt: 6.10.1
+            artifact: linux-qt610
+          # Windows Qt 6.10
+          - os: windows-latest
+            qt: 6.10.1
+            artifact: windows-qt610
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ matrix.qt }}
+          cache: true
+          
+      - name: Remove MinGW from PATH
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          $env:PATH = ($env:PATH.Split(';') | Where-Object {$_ -notmatch 'mingw64'}) -join ';'
+          
+      - name: Configure (qmake)
+        shell: bash
+        run: |
+          mkdir -p build
+          cd build
+          qmake ../src
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: |
+          cd build
+          nmake
+          windeployqt release\CipherTools.exe
+          
+      - name: Build
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          cd build
+          make -j$(nproc || sysctl -n hw.ncpu)
+          make INSTALL_ROOT="$PWD/../dist" install
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: dist
+          
+      - name: Upload artifact for windows
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          path: build\release\
