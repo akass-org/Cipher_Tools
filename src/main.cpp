@@ -15,7 +15,7 @@
 #include "version.h" // 统一输出版本号
 
 // 版本号
-QString AK_VERSION = "CIPHER.rana.alpha_release.251214"; //主程序版本号
+QString AK_VERSION = "CIPHER.rana.alpha_snapshot.251214"; //主程序版本号
 QString AKT_VERSION = "RANATOOLKIT.astra.prototype"; //该程序版本号请根据 Ne0W0r1d/Rana_Toolkit 进行编写，目前 Prototype 是因为工具箱并没有实现
 
 

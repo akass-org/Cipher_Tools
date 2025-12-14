@@ -37,12 +37,12 @@
    </property>
    <item>
     <property name="text">
-     <string>1</string>
+     <string>1 - ipw.cn</string>
     </property>
    </item>
    <item>
     <property name="text">
-     <string>2</string>
+     <string>2 - </string>
     </property>
    </item>
   </widget>
@@ -70,7 +70,7 @@
    </property>
    <item>
     <property name="text">
-     <string>1</string>
+     <string>1 - cip.cc</string>
     </property>
    </item>
    <item>

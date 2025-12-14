@@ -44,6 +44,7 @@ public:
     void getisp(); // 获取ISP
     void getlan(); // 获取LAN相关
     void getpriority();// 查询IP优先级
+
 private slots:
 /* Help */
     /* 帮助 */
@@ -80,5 +81,7 @@ private slots:
 private:
     Ui::home *ui;
     QNetworkAccessManager *sessionNet;
+    QString ipv4; // V4 回调
+    QString ipv6; // V6 回调
 };
 #endif // HOME_H

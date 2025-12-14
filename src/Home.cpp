@@ -183,7 +183,7 @@ void home::HomeInfo_Refresh(){
     home::getlan(); // 执行本地获取
     home::getwanv4(); // 执行公网 V4 获取
     home::getwanv6(); // 执行公网 V6 获取
-    home::getisp();// 执行 ISP 获取
+    //home::getisp();// 执行 ISP 获取
     home::getpriority(); // 执行优先级获取
 }
 
@@ -198,7 +198,8 @@ void home::getwanv4() // V4
     connect(v4reply, &QNetworkReply::finished, this, [this, v4reply]() { // 连接V4 Reply
 
         if (v4reply->error() == QNetworkReply::NoError) { // 判定是否有错误
-            QString ipv4 = QString(v4reply->readAll()).trimmed(); // 设置IPV4变量为v4返回信息
+            this->ipv4 = QString(v4reply->readAll()).trimmed(); // 设置IPV4变量为v4返回信息
+            getisp();
             qInfo() << "公网 IPv4:" << ipv4; // Qt调试输出信息
             ui -> v4add -> setText(ipv4); // 显示在UI中
         } else {
@@ -240,7 +241,7 @@ void home::getwanv6()
 // 获得 ISP
 void home::getisp() {
     QNetworkAccessManager *ispget = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("https://cip.cc"));
+    QNetworkRequest request(QUrl("https://cip.cc/"+ this->ipv4));
     QNetworkReply *ispreply = ispget->get(request);
     connect(ispreply, &QNetworkReply::finished, this, [this, ispreply]() {
         if (ispreply->error() == QNetworkReply::NoError) {
