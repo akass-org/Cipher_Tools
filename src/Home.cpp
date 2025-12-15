@@ -16,7 +16,6 @@ home::home(QWidget *parent)
     , ui(new Ui::home)
 {
     ui->setupUi(this);//启动UI
-    HomeInfo_Refresh();
     setFixedSize(this->width(),this->height()); //固定大小
 
     QString systemname = QSysInfo::kernelType();// 获取内核信息
@@ -25,6 +24,8 @@ home::home(QWidget *parent)
 
     ui -> Version ->setText(AK_VERSION);
     ui -> test_waring -> setText("Alpha 版本 || 请勿用于生产环境 || 请及时汇报BUG || 请勿滥用接口");
+
+    home::HomeInfo_Refresh();
 
     qInfo()<<"系统环境："<<systemname<<"；系统："<<distro<<"；系统版本："<<systemver;
     qInfo()<<"软件版本："<<AK_VERSION<<"；工具箱版本："<<AKT_VERSION;
@@ -36,13 +37,13 @@ home::home(QWidget *parent)
 
     connect(ui -> repoCNB, &QAction::triggered, this, &home::help_repoCNB_trigger);// 菜单栏 - 帮助 - 查看源码：CNB
     connect(ui -> repoGithub, &QAction::triggered, this, &home::help_repoGithub_trigger);// 菜单栏 - 帮助 - 查看源码：Github
-    //connect(ui -> repoCodeberg, &QAction::triggered, this, &home::help_logCodeberg_trigger);// 菜单栏 - 帮助 - 查看源码：Codeberg
+    connect(ui -> repoCodeberg, &QAction::triggered, this, &home::help_repoCodeberg_trigger);// 菜单栏 - 帮助 - 查看源码：Codeberg
 
-    connect(ui -> logCNB, &QAction::triggered, this, &home::help_log_trigger);// 菜单栏 - 帮助 - 更新日志：CNB
+    connect(ui -> uplog, &QAction::triggered, this, &home::help_log_trigger);// 菜单栏 - 帮助 - 更新日志
 
     connect(ui -> issueCNB, &QAction::triggered, this, &home::help_issueCNB_trigger);// 菜单栏 - 帮助 - 问题反馈：CNB
     connect(ui -> issueGithub, &QAction::triggered, this, &home::help_issueGithub_trigger);// 菜单栏 - 帮助 - 问题反馈：Github
-    //connect(ui -> issueCodeberg, &QAction::triggered, this, &home::help_issueCodeberg_trigger);// 菜单栏 - 帮助 - 问题反馈：Codeberg
+    connect(ui -> issueCodeberg, &QAction::triggered, this, &home::help_issueCodeberg_trigger);// 菜单栏 - 帮助 - 问题反馈：Codeberg
 
     /* 菜单-工具 */
     connect(ui -> MOWeb, &QAction::triggered, this, &home::Tools_MOWeb_Trigger); // 工具：网页版多出口
@@ -107,26 +108,36 @@ void home::help_Wiki_trigger(){
 
     qDebug() << "桌面服务信号已发出，请检查浏览器 Wiki";
 
-    /*以下菜单栏相关代码同理 QUrl & Desktup Services*/
-
 }
-/*打开CNB*/
+/*打开 CNB*/
 void home::help_repoCNB_trigger(){
 
     qInfo()<<"已触发help_repoCNB_trigger";
 
-    QUrl cnb_repo("https://cnb.cool/neoengine_dev/Army_Knife");
+    QUrl cnb_repo("https://cnb.cool/neoengine_dev/Cipher_Tools");
     QDesktopServices::openUrl(cnb_repo);
 
     qDebug() << "桌面服务信号已发出，请检查浏览器 CNB Repo";
 
 }
-/*打开github*/
+/*打开 github*/
 void home::help_repoGithub_trigger(){
 
     qInfo()<<"已触发help_repoGithub_trigger";
 
-    QUrl wikiurl("https://github.com/akass-org/Army_Knife/");
+    QUrl wikiurl("https://github.com/akass-org/Cipher_Tools/");
+    QDesktopServices::openUrl(wikiurl);
+
+    qDebug() << "打开Github信号已发出，请检查浏览器";
+
+}
+
+/*打开 Codeberg */
+void home::help_repoCodeberg_trigger(){
+
+    qInfo()<<"已触发help_repoGithub_trigger";
+
+    QUrl wikiurl("https://codeberg.org/Ne0W0r1d/Cipher_Tools/");
     QDesktopServices::openUrl(wikiurl);
 
     qDebug() << "打开Github信号已发出，请检查浏览器";
@@ -142,6 +153,7 @@ void home::help_About_trigger(){
     qDebug()<<aboutWidget<<"aboutWidget 已打开，请检查窗口状态";
 
 }
+
 /*打开更新日志*/
 void home::help_log_trigger(){
 
@@ -150,23 +162,33 @@ void home::help_log_trigger(){
     qDebug() << "打开更新日志信号已发出，请检查浏览器";
 
 }
+
 /*IssueCNB*/
 void home::help_issueCNB_trigger(){
 
-    QUrl issuecnb("https://cnb.cool/neoengine_dev/Army_Knife/-/issues");
+    QUrl issuecnb("https://cnb.cool/neoengine_dev/Cipher_Tools/-/issues");
     QDesktopServices::openUrl(issuecnb);
     qDebug() << "打开CNB议题 信号已发出，请检查浏览器";
 
 }
+
 /*IssueGithub*/
 void home::help_issueGithub_trigger(){
 
-    QUrl issuegithub("https://github.com/akass-org/Army_Knife/issues");
+    QUrl issuegithub("https://github.com/akass-org/Cipher_Tools/issues");
     QDesktopServices::openUrl(issuegithub);
     qDebug() << "打开Github议题已发出，请检查浏览器";
 
 }
 
+/*IssueCodeberg*/
+void home::help_issueCodeberg_trigger(){
+
+    QUrl issuegithub("https://codeberg.com/Ne0W0r1d/Cipher_Tools/issues");
+    QDesktopServices::openUrl(issuegithub);
+    qDebug() << "打开Github议题已发出，请检查浏览器";
+
+}
 
 /* 刷新按键、首次获取 */
 void home::HomeInfo_Refresh(){
@@ -177,12 +199,14 @@ void home::HomeInfo_Refresh(){
     ui -> ispinfo -> setText("Loading......"); // isp UI: 初始化
     ui -> localv4add -> setText("Loading......"); // 局域网V4: UI初始化
     ui -> localv6add -> setText("Loading......"); // 局域网V6: UI初始化
+    ui -> priority -> setText("Loading......"); // 优先级: UI初始化
 
+    home::getpriority(); // 优先级获取
     home::getlan(); // 执行本地获取
     home::getwanv4(); // 执行公网 V4 获取
     home::getwanv6(); // 执行公网 V6 获取
-    //home::getisp();// 执行 ISP 获取（已废弃，直接走 wanv4 过后执行异步）
-    home::getpriority(); // 执行优先级获取
+    //home::getisp(); // 执行 ISP 获取（已废弃，直接走 wanv4 过后执行异步）
+
 }
 
 // 远程IP、ISP获取
@@ -261,6 +285,7 @@ void home::getisp() {
         }
 
         ispreply->deleteLater();
+         // 执行优先级获取
     });
 }
 

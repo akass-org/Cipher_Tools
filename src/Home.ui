@@ -410,7 +410,6 @@
      </property>
      <addaction name="repoCNB"/>
      <addaction name="repoGithub"/>
-     <addaction name="repoGitee"/>
      <addaction name="repoCodeberg"/>
     </widget>
     <widget class="QMenu" name="issue">
@@ -420,23 +419,13 @@
      <addaction name="issueCNB"/>
      <addaction name="issueGithub"/>
      <addaction name="issueCodeberg"/>
-     <addaction name="issueGitee"/>
-    </widget>
-    <widget class="QMenu" name="log">
-     <property name="title">
-      <string>更新日志</string>
-     </property>
-     <addaction name="logGithub"/>
-     <addaction name="logGitee"/>
-     <addaction name="logCNB"/>
-     <addaction name="logCodeberg"/>
     </widget>
     <addaction name="about"/>
+    <addaction name="uplog"/>
     <addaction name="wiki"/>
     <addaction name="separator"/>
     <addaction name="blog"/>
     <addaction name="repos"/>
-    <addaction name="log"/>
     <addaction name="issue"/>
    </widget>
    <widget class="QMenu" name="tools">
@@ -619,6 +608,11 @@
   <action name="issueGitee">
    <property name="text">
     <string>Gitee</string>
+   </property>
+  </action>
+  <action name="uplog">
+   <property name="text">
+    <string>更新日志</string>
    </property>
   </action>
  </widget>

@@ -55,8 +55,8 @@ private slots:
     /* 仓库 */
     void help_repoGithub_trigger();// Github 仓库信号槽
     void help_repoCNB_trigger();// CNB 仓库信号槽
-    //void help_repoCodeberg_trigger();// Codeberg 仓库信号槽
-    //void help_repoGitee_trigger();// Gitee 仓库信号槽
+    void help_repoCodeberg_trigger();// Codeberg 仓库信号槽
+
 
     /* 更新日志 */
     void help_log_trigger();// 更新日志信号槽
@@ -64,13 +64,12 @@ private slots:
     /* 议题 */
     void help_issueCNB_trigger();// IssueCNB 信号槽
     void help_issueGithub_trigger();// IssueGithub 信号槽
-    //void help_issueCodeberg_trigger(); // IssueCodeberg 信号
+    void help_issueCodeberg_trigger(); // IssueCodeberg 信号
 
 /* 主页 */
     void HomeInfo_Refresh(); // 刷新按钮信号槽
     // void HomeInfo_Settings(); // 设置按钮信号槽
-    // void HomeInfo_RecordToFile(); // 记录当前IP地址按钮
-    // void HomeInfo_CheckRecorded(); //查询已记录按钮
+
     /* Tools */
     void Tools_MOWeb_Trigger(); // 在线版多出口信号槽
     //void Tools_MOQt_Trigger();
