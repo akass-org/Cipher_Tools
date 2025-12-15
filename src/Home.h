@@ -44,6 +44,7 @@ public:
     void getisp(); // 获取ISP
     void getlan(); // 获取LAN相关
     void getpriority();// 查询IP优先级
+
 private slots:
 /* Help */
     /* 帮助 */
@@ -54,31 +55,28 @@ private slots:
     /* 仓库 */
     void help_repoGithub_trigger();// Github 仓库信号槽
     void help_repoCNB_trigger();// CNB 仓库信号槽
-    //void help_repoCodeberg_trigger();// Codeberg 仓库信号槽
-    //void help_repoGitee_trigger();// Gitee 仓库信号槽
+    void help_repoCodeberg_trigger();// Codeberg 仓库信号槽
+
 
     /* 更新日志 */
-    void help_logCNB_trigger();// CNB 更新日志信号槽
-    //void help_logGithub_trigger();// Github 更新日志信号槽
-    //void help_logCodeberg_trigger();// Codeberg 更新日志信号槽
-    //void help_logGitee_trigger();// Gitee 更新日志信号槽
+    void help_log_trigger();// 更新日志信号槽
 
     /* 议题 */
     void help_issueCNB_trigger();// IssueCNB 信号槽
     void help_issueGithub_trigger();// IssueGithub 信号槽
-    //void help_issueGitee_trigger();// IssueGitee 信号槽
-    //void help_issueCodeberg_trigger();// IssueCodeberg 信号槽
+    void help_issueCodeberg_trigger(); // IssueCodeberg 信号
 
 /* 主页 */
     void HomeInfo_Refresh(); // 刷新按钮信号槽
     // void HomeInfo_Settings(); // 设置按钮信号槽
-    // void HomeInfo_RecordToFile(); // 记录当前IP地址按钮
-    // void HomeInfo_CheckRecorded(); //查询已记录按钮
+
     /* Tools */
     void Tools_MOWeb_Trigger(); // 在线版多出口信号槽
     //void Tools_MOQt_Trigger();
 private:
     Ui::home *ui;
     QNetworkAccessManager *sessionNet;
+    QString ipv4; // V4 回调
+    QString ipv6; // V6 回调
 };
 #endif // HOME_H

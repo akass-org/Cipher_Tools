@@ -16,7 +16,6 @@ home::home(QWidget *parent)
     , ui(new Ui::home)
 {
     ui->setupUi(this);//启动UI
-    HomeInfo_Refresh();
     setFixedSize(this->width(),this->height()); //固定大小
 
     QString systemname = QSysInfo::kernelType();// 获取内核信息
@@ -25,6 +24,8 @@ home::home(QWidget *parent)
 
     ui -> Version ->setText(AK_VERSION);
     ui -> test_waring -> setText("Alpha 版本 || 请勿用于生产环境 || 请及时汇报BUG || 请勿滥用接口");
+
+    home::HomeInfo_Refresh();
 
     qInfo()<<"系统环境："<<systemname<<"；系统："<<distro<<"；系统版本："<<systemver;
     qInfo()<<"软件版本："<<AK_VERSION<<"；工具箱版本："<<AKT_VERSION;
@@ -36,18 +37,13 @@ home::home(QWidget *parent)
 
     connect(ui -> repoCNB, &QAction::triggered, this, &home::help_repoCNB_trigger);// 菜单栏 - 帮助 - 查看源码：CNB
     connect(ui -> repoGithub, &QAction::triggered, this, &home::help_repoGithub_trigger);// 菜单栏 - 帮助 - 查看源码：Github
-    //connect(ui -> repoCodeberg, &QAction::triggered, this, &home::help_logCodeberg_trigger);// 菜单栏 - 帮助 - 查看源码：Codeberg
-    //connect(ui -> repoGitee, &QAction::triggered, this, &home::help_logGitee_trigger);// 菜单栏 - 帮助 - 查看源码：Gitee
+    connect(ui -> repoCodeberg, &QAction::triggered, this, &home::help_repoCodeberg_trigger);// 菜单栏 - 帮助 - 查看源码：Codeberg
 
-    connect(ui -> logCNB, &QAction::triggered, this, &home::help_logCNB_trigger);// 菜单栏 - 帮助 - 更新日志：CNB
-    //connect(ui -> logGithub, &QAction::triggered, this, &home::help_logGithub_trigger);// 菜单栏 - 帮助 - 更新日志：Github
-    //connect(ui -> logGitee, &QAction::triggered, this, &home::help_logGitee_trigger);// 菜单栏 - 帮助 - 更新日志：CNB
-    //connect(ui -> logCodeberg, &QAction::triggered, this, &home::help_logCodeberg_trigger);// 菜单栏 - 帮助 - 更新日志：Codeberg
+    connect(ui -> uplog, &QAction::triggered, this, &home::help_log_trigger);// 菜单栏 - 帮助 - 更新日志
 
     connect(ui -> issueCNB, &QAction::triggered, this, &home::help_issueCNB_trigger);// 菜单栏 - 帮助 - 问题反馈：CNB
     connect(ui -> issueGithub, &QAction::triggered, this, &home::help_issueGithub_trigger);// 菜单栏 - 帮助 - 问题反馈：Github
-    //connect(ui -> issueCodeberg, &QAction::triggered, this, &home::help_issueCodeberg_trigger);// 菜单栏 - 帮助 - 问题反馈：Codeberg
-    //connect(ui -> issueGitee, &QAction::triggered, this, &home::help_issueGitee_trigger);// 菜单栏 - 帮助 - 问题反馈：Gitee
+    connect(ui -> issueCodeberg, &QAction::triggered, this, &home::help_issueCodeberg_trigger);// 菜单栏 - 帮助 - 问题反馈：Codeberg
 
     /* 菜单-工具 */
     connect(ui -> MOWeb, &QAction::triggered, this, &home::Tools_MOWeb_Trigger); // 工具：网页版多出口
@@ -68,6 +64,7 @@ home::home(QWidget *parent)
 
 home::~home()
 {
+    qInfo()<<tr("Exited");
     delete ui;
 }
 
@@ -84,6 +81,7 @@ void home::Tools_MOWeb_Trigger(){
 
     qDebug() << "桌面服务信号已发出，请检查浏览器 MutiOutWeb";
 }
+
 
 /*打开文档页*/
 
@@ -110,31 +108,42 @@ void home::help_Wiki_trigger(){
 
     qDebug() << "桌面服务信号已发出，请检查浏览器 Wiki";
 
-    /*以下菜单栏相关代码同理 QUrl & Desktup Services*/
-
 }
-/*打开CNB*/
+/*打开 CNB*/
 void home::help_repoCNB_trigger(){
 
     qInfo()<<"已触发help_repoCNB_trigger";
 
-    QUrl cnb_repo("https://cnb.cool/neoengine_dev/Army_Knife");
+    QUrl cnb_repo("https://cnb.cool/neoengine_dev/Cipher_Tools");
     QDesktopServices::openUrl(cnb_repo);
 
     qDebug() << "桌面服务信号已发出，请检查浏览器 CNB Repo";
 
 }
-/*打开github*/
+/*打开 github*/
 void home::help_repoGithub_trigger(){
 
     qInfo()<<"已触发help_repoGithub_trigger";
 
-    QUrl wikiurl("https://github.com/akass-org/Army_Knife/");
+    QUrl wikiurl("https://github.com/akass-org/Cipher_Tools/");
     QDesktopServices::openUrl(wikiurl);
 
     qDebug() << "打开Github信号已发出，请检查浏览器";
 
 }
+
+/*打开 Codeberg */
+void home::help_repoCodeberg_trigger(){
+
+    qInfo()<<"已触发help_repoGithub_trigger";
+
+    QUrl wikiurl("https://codeberg.org/Ne0W0r1d/Cipher_Tools/");
+    QDesktopServices::openUrl(wikiurl);
+
+    qDebug() << "打开Github信号已发出，请检查浏览器";
+
+}
+
 /*打开关于窗口*/
 void home::help_About_trigger(){
 
@@ -144,31 +153,42 @@ void home::help_About_trigger(){
     qDebug()<<aboutWidget<<"aboutWidget 已打开，请检查窗口状态";
 
 }
-/*打开更新日志*/
-void home::help_logCNB_trigger(){
 
-    QUrl updateurl("https://cnb.cool/neoengine_dev/Army_Knife/-/releases");
+/*打开更新日志*/
+void home::help_log_trigger(){
+
+    QUrl updateurl("https://ct.ne0w0r1d.top/update/");
     QDesktopServices::openUrl(updateurl);
     qDebug() << "打开更新日志信号已发出，请检查浏览器";
 
 }
+
 /*IssueCNB*/
 void home::help_issueCNB_trigger(){
 
-    QUrl issuecnb("https://cnb.cool/neoengine_dev/Army_Knife/-/issues");
+    QUrl issuecnb("https://cnb.cool/neoengine_dev/Cipher_Tools/-/issues");
     QDesktopServices::openUrl(issuecnb);
     qDebug() << "打开CNB议题 信号已发出，请检查浏览器";
 
 }
+
 /*IssueGithub*/
 void home::help_issueGithub_trigger(){
 
-    QUrl issuegithub("https://github.com/akass-org/Army_Knife/issues");
+    QUrl issuegithub("https://github.com/akass-org/Cipher_Tools/issues");
     QDesktopServices::openUrl(issuegithub);
     qDebug() << "打开Github议题已发出，请检查浏览器";
 
 }
 
+/*IssueCodeberg*/
+void home::help_issueCodeberg_trigger(){
+
+    QUrl issuegithub("https://codeberg.com/Ne0W0r1d/Cipher_Tools/issues");
+    QDesktopServices::openUrl(issuegithub);
+    qDebug() << "打开Github议题已发出，请检查浏览器";
+
+}
 
 /* 刷新按键、首次获取 */
 void home::HomeInfo_Refresh(){
@@ -179,12 +199,14 @@ void home::HomeInfo_Refresh(){
     ui -> ispinfo -> setText("Loading......"); // isp UI: 初始化
     ui -> localv4add -> setText("Loading......"); // 局域网V4: UI初始化
     ui -> localv6add -> setText("Loading......"); // 局域网V6: UI初始化
+    ui -> priority -> setText("Loading......"); // 优先级: UI初始化
 
+    home::getpriority(); // 优先级获取
     home::getlan(); // 执行本地获取
     home::getwanv4(); // 执行公网 V4 获取
     home::getwanv6(); // 执行公网 V6 获取
-    home::getisp();// 执行 ISP 获取
-    home::getpriority(); // 执行优先级获取
+    //home::getisp(); // 执行 ISP 获取（已废弃，直接走 wanv4 过后执行异步）
+
 }
 
 // 远程IP、ISP获取
@@ -194,21 +216,20 @@ void home::getwanv4() // V4
     QNetworkAccessManager *v4manager = new QNetworkAccessManager(this); // 设置新的QNAM
     QNetworkRequest request(QUrl("https://4.ipw.cn")); // 设置Request API为ipw.cn（TODO LIST - 支持多API，并研究出口API）
     QNetworkReply *v4reply = v4manager->get(request); // 设置Manager操作为request
-    qDebug()<<v4reply; // 为v4reply设置Debug
     connect(v4reply, &QNetworkReply::finished, this, [this, v4reply]() { // 连接V4 Reply
 
         if (v4reply->error() == QNetworkReply::NoError) { // 判定是否有错误
-            QString ipv4 = QString(v4reply->readAll()).trimmed(); // 设置IPV4变量为v4返回信息
-            qInfo() << "公网 IPv4:" << ipv4; // Qt调试输出信息
+            this->ipv4 = QString(v4reply->readAll()).trimmed(); // 设置IPV4变量为v4返回信息
+            home::getisp(); // 异步执行 ISP，避免 ISP 得不到现在 API 的 ISP 信息变成了奇奇怪怪的信息
+            //qInfo() << "公网 IPv4:" << ipv4; // Qt调试输出信息
             ui -> v4add -> setText(ipv4); // 显示在UI中
         } else {
             QString ipv4_error = v4reply->errorString();
-            qWarning() << "请求失败:" << v4reply->errorString(); // 输出错误信息
+            qCritical() << "请求失败:" << v4reply->errorString(); // 输出错误信息
             ui -> v4add -> setText("请求失败🐱，请检查日志🐱"); // 输出错误UI
         }
 
         v4reply->deleteLater(); // 从我的内存滚出去😡
-        qDebug()<<v4reply;
     });
 }
 /*以下代码同理*/
@@ -219,20 +240,18 @@ void home::getwanv6()
     QNetworkAccessManager *v6manager = new QNetworkAccessManager(this);
     QNetworkRequest request(QUrl("https://6.ipw.cn"));
     QNetworkReply *v6reply = v6manager->get(request);
-    qDebug()<<v6reply;
     connect(v6reply, &QNetworkReply::finished, this, [this, v6reply]() {
 
         if (v6reply->error() == QNetworkReply::NoError) {
             QString ipv6 = QString(v6reply->readAll()).trimmed();
-            qInfo() << "公网 IPv6:" << ipv6;
+            // qInfo() << "公网 IPv6:" << ipv6;
             ui -> v6add -> setText(ipv6);
         } else {
-            qWarning() << "请求失败:" << v6reply->errorString();
+            qCritical() << "请求失败:" << v6reply->errorString();
             ui -> v6add -> setText("查询失败🐱看看右边有没有输出喵，如果没有请检查日志喵");
         }
 
         v6reply->deleteLater();
-        qDebug()<<v6reply;
 
     });
 }
@@ -240,7 +259,7 @@ void home::getwanv6()
 // 获得 ISP
 void home::getisp() {
     QNetworkAccessManager *ispget = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("https://cip.cc"));
+    QNetworkRequest request(QUrl("https://cip.cc/"+ this->ipv4));
     QNetworkReply *ispreply = ispget->get(request);
     connect(ispreply, &QNetworkReply::finished, this, [this, ispreply]() {
         if (ispreply->error() == QNetworkReply::NoError) {
@@ -253,7 +272,6 @@ void home::getisp() {
 
             if (match.hasMatch()) {
                 isp = match.captured(1).trimmed();
-                qInfo() << "ISP:" << isp;
                 ui->ispinfo->setText(isp);
             } else {
                 isp = "查询不到喵🐱，请检查日志🐱";
@@ -267,7 +285,7 @@ void home::getisp() {
         }
 
         ispreply->deleteLater();
-        qDebug()<<ispreply;
+         // 执行优先级获取
     });
 }
 
@@ -297,7 +315,6 @@ void home::getpriority(){ // 连接优先级
 
             ui -> priority -> setText(prefix_pri+pri);
             priorityreply->deleteLater();
-            qDebug()<<priorityreply;
         }
     });
 }
@@ -306,33 +323,32 @@ void home::getpriority(){ // 连接优先级
 void home::getlan(){
     QString lanv4_add, lanv6_add, macadd;
     const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces(); // 获取所有网卡
-    qDebug()<<interfaces;
+    //qDebug()<<interfaces;
     for (const QNetworkInterface &iface : interfaces) {
         if (!iface.flags().testFlag(QNetworkInterface::IsUp) || //是否启用
             !iface.flags().testFlag(QNetworkInterface::IsRunning) || // 是否运行
             iface.flags().testFlag(QNetworkInterface::IsLoopBack)) // 是否回环
             continue; // 遍历后继续
         macadd = iface.hardwareAddress();// 设置macadd为MAC地址
-        qInfo()<< macadd << iface.humanReadableName();
+        //qInfo()<< macadd << iface.humanReadableName();
         ui->Mac->setText(macadd + "（" + iface.humanReadableName() + "）"); // 设置UI: Mac地址为macadd变量
 
         for (const QNetworkAddressEntry &entry : iface.addressEntries()) { // 遍历接口地址
             QHostAddress ip = entry.ip(); // 获取IP地址
             if (ip.protocol() == QAbstractSocket::IPv4Protocol) {// 检测是否有V4
+
                 lanv4_add = ip.toString(); // 获取V4字符串
                 ui -> localv4add -> setText(lanv4_add.isEmpty() ? "查询失败喵🐱！" : lanv4_add);// UI：输出V4字符串
+                qCritical() << "请检查网络配置喵🐱，日志如果输出 False 请不要在意" <<lanv4_add.isEmpty();
+
             } else if (ip.protocol() == QAbstractSocket::IPv6Protocol) {//检测是否有V6
                 if (!ip.toString().startsWith("fe80"))// 屏蔽本地IP地址
                 lanv6_add = ip.toString(); // 获取V6字符串
                 ui -> localv6add -> setText(lanv6_add.isEmpty() ? "请求失败喵🐱请把鼠标放在我上面喵" : lanv6_add); // UI：输出V6字符串
                 ui -> localv6add -> setToolTip(lanv6_add.isEmpty() ? "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" : lanv6_add);
+                qWarning() << "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" <<lanv6_add.isEmpty();
                 }
             }
-
-            qDebug() << "请检查网络配置喵🐱" <<lanv4_add.isEmpty();
-            qInfo() << "本地IPv4" << lanv4_add;
-            qDebug() << "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" <<lanv6_add.isEmpty();
-            qInfo() << "本地IPv6：" << lanv6_add;
 
             break; // 业务结束
         }

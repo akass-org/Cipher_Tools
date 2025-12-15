@@ -17,7 +17,7 @@ about::about(QWidget *parent)
 {
     ui->setupUi(this);
     setFixedSize(this->width(),this->height());
-    qDebug()<< "关于窗口已启动 Fuck About" ;
+    qDebug()<< tr("About window opened");
 
     QString systemname = QSysInfo::kernelType();// 获取内核信息
     QString distro = QSysInfo::prettyProductName();// 获取发行版名称
