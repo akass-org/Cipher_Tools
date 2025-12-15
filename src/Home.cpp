@@ -11,24 +11,25 @@
 #include "About.h"
 #include "ui_Home.h"
 #include "version.h"
+
 home::home(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::home)
 {
-    ui->setupUi(this);//启动UI
-    setFixedSize(this->width(),this->height()); //固定大小
+    ui->setupUi(this);
+    setFixedSize(this->width(),this->height()); //固定大小（Fixed site）
 
-    QString systemname = QSysInfo::kernelType();// 获取内核信息
-    QString distro = QSysInfo::prettyProductName();// 获取发行版名称
-    QString systemver = QSysInfo::productVersion();// 获取系统版本
+    QString systemname = QSysInfo::kernelType();// 获取内核信息（Get Kernel Information）
+    QString distro = QSysInfo::prettyProductName();// 获取发行版名称（Get Distro Name）
+    QString systemver = QSysInfo::productVersion();// 获取系统版本（Get System Version）
 
-    ui -> Version ->setText(AK_VERSION);
-    ui -> test_waring -> setText("Alpha 版本 || 请勿用于生产环境 || 请及时汇报BUG || 请勿滥用接口");
+    ui -> Version ->setText(AK_VERSION); // 主页应用版本（Home App Version）
+    ui -> test_waring -> setText("Alpha 版本 || 请勿用于生产环境 || 请及时汇报BUG || 请勿滥用接口"); // 主页测试版警告（Home Testing Version Warning）
 
-    home::HomeInfo_Refresh();
+    home::HomeInfo_Refresh(); // 启动首次触发刷新（Trigger Auto Refresh）
 
-    qInfo()<<"系统环境："<<systemname<<"；系统："<<distro<<"；系统版本："<<systemver;
-    qInfo()<<"软件版本："<<AK_VERSION<<"；工具箱版本："<<AKT_VERSION;
+    qInfo()<<"系统环境："<<systemname<<"；系统："<<distro<<"；系统版本："<<systemver; // 输出系统版本日志（Echo System Version Log）
+    qInfo()<<"软件版本："<<AK_VERSION<<"；工具箱版本："<<AKT_VERSION; // 输出软件版本日志（Echo App Version Log），版本在 Main.cpp（Version in main.cpp）
 
     // 菜单栏：帮助
     connect(ui -> about, &QAction::triggered, this, &home::help_About_trigger); // 菜单栏 - 帮助：关于
@@ -66,6 +67,170 @@ home::~home()
 {
     qInfo()<<tr("Exited");
     delete ui;
+}
+
+/* 刷新按键、首次获取 */
+void home::HomeInfo_Refresh(){
+    qInfo()<<"信息获取/刷新信号已收到，初始化UI并获取信息中";
+
+    ui -> v4add -> setText("Loading......"); // v4地址ui: 初始化
+    ui -> v6add -> setText("Loading......"); // v6地址ui: 初始化
+    ui -> ispinfo -> setText("Loading......"); // isp UI: 初始化
+    ui -> localv4add -> setText("Loading......"); // 局域网V4: UI初始化
+    ui -> localv6add -> setText("Loading......"); // 局域网V6: UI初始化
+    ui -> priority -> setText("Loading......"); // 优先级: UI初始化
+
+    home::getpriority(); // 优先级获取
+    home::getlan(); // 执行本地获取
+    home::getwanv4(); // 执行公网 V4 获取
+    home::getwanv6(); // 执行公网 V6 获取
+    //home::getisp(); // 执行 ISP 获取（已废弃，直接走 wanv4 过后执行异步）
+
+}
+
+/* 主页功能实现 */
+
+void home::getwanv4() // 公网 IPv4（Public IPv4）
+{
+    QNetworkAccessManager *v4manager = new QNetworkAccessManager(this); // 设置新的QNAM
+    QNetworkRequest request(QUrl("https://4.ipw.cn")); // 设置Request API为ipw.cn（TODO LIST - 支持多API，并研究出口API）
+    QNetworkReply *v4reply = v4manager->get(request); // 设置Manager操作为request
+    connect(v4reply, &QNetworkReply::finished, this, [this, v4reply]() { // 连接V4 Reply
+
+        if (v4reply->error() == QNetworkReply::NoError) { // 判定是否有错误
+            this->ipv4 = QString(v4reply->readAll()).trimmed(); // 设置IPV4变量为v4返回信息
+            home::getisp(); // 异步执行 ISP，避免 ISP 得不到现在 API 的 ISP 信息变成了奇奇怪怪的信息
+            //qInfo() << "公网 IPv4:" << ipv4; // Qt调试输出信息
+            ui -> v4add -> setText(ipv4); // 显示在UI中
+        } else {
+            QString ipv4_error = v4reply->errorString();
+            qCritical() << "请求失败:" << v4reply->errorString(); // 输出错误信息
+            ui -> v4add -> setText("请求失败🐱，请检查日志🐱"); // 输出错误UI
+        }
+
+        v4reply->deleteLater(); // 从我的内存滚出去😡
+    });
+}
+/*以下代码同理*/
+
+// 获得 V6 公网 IP
+void home::getwanv6()
+{
+    QNetworkAccessManager *v6manager = new QNetworkAccessManager(this);
+    QNetworkRequest request(QUrl("https://6.ipw.cn"));
+    QNetworkReply *v6reply = v6manager->get(request);
+    connect(v6reply, &QNetworkReply::finished, this, [this, v6reply]() {
+
+        if (v6reply->error() == QNetworkReply::NoError) {
+            QString ipv6 = QString(v6reply->readAll()).trimmed();
+            // qInfo() << "公网 IPv6:" << ipv6;
+            ui -> v6add -> setText(ipv6);
+        } else {
+            qCritical() << "请求失败:" << v6reply->errorString();
+            ui -> v6add -> setText("查询失败🐱看看右边有没有输出喵，如果没有请检查日志喵");
+        }
+
+        v6reply->deleteLater();
+
+    });
+}
+
+// 获得 ISP
+void home::getisp() {
+    QNetworkAccessManager *ispget = new QNetworkAccessManager(this);
+    QNetworkRequest request(QUrl("https://cip.cc/"+ this->ipv4));
+    QNetworkReply *ispreply = ispget->get(request);
+    connect(ispreply, &QNetworkReply::finished, this, [this, ispreply]() {
+        if (ispreply->error() == QNetworkReply::NoError) {
+
+            QString replyText = QString::fromUtf8(ispreply->readAll());
+            QString isp;
+
+            static const QRegularExpression regex(R"(数据二\s*:\s*(.*))");// 正则表达式提取
+            QRegularExpressionMatch match = regex.match(replyText);
+
+            if (match.hasMatch()) {
+                isp = match.captured(1).trimmed();
+                ui->ispinfo->setText(isp);
+            } else {
+                isp = "查询不到喵🐱，请检查日志🐱";
+                ui->ispinfo->setText(isp);
+                qWarning() << "查询不到喵：" <<ispreply->errorString();
+            }
+        }else{
+
+            qCritical() << "请求失败喵：" <<ispreply->errorString();
+            ui -> ispinfo -> setText("请求失败喵，请检查日志🐱");
+        }
+
+        ispreply->deleteLater();
+        // 执行优先级获取
+    });
+}
+
+void home::getpriority(){ // 连接优先级
+    QNetworkAccessManager *priorityget = new QNetworkAccessManager(this);
+    QNetworkRequest request(QUrl("https://test.ipw.cn"));
+    QNetworkReply *priorityreply = priorityget->get(request);
+
+    connect(priorityreply, &QNetworkReply::finished, this, [this, priorityreply](){
+        if(priorityreply->error() == QNetworkReply::NoError){
+
+            QString res = QString::fromUtf8(priorityreply->readAll()).trimmed(); // 数据转换（原始字节 -> UTF 9字符串）
+            QString pri;
+            QString prefix_pri = "IP 优先模式："; // pri 输出到 UI 的变量前缀
+            if(res.contains("ipv6",Qt::CaseInsensitive) || res.contains(":")){ // 设置判断标识符 - V6
+                pri="IPv6 优先";
+                qInfo()<<pri;
+
+            } else if(res.contains("ipv4",Qt::CaseInsensitive) || res.contains(".")){ // 回退查询判断标识符 - V6
+                pri="IPv4 优先";
+                qInfo()<<pri;
+
+            } else{ // 回退报错
+                pri="暂时无法查询，请检查网络情况";
+                qWarning() << "暂时无法查询，请检查网络情况喵";
+            }
+
+            ui -> priority -> setText(prefix_pri+pri);
+            priorityreply->deleteLater();
+        }
+    });
+}
+
+// 本地获取（计划增加多网卡支持）
+void home::getlan(){
+    QString lanv4_add, lanv6_add, macadd;
+    const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces(); // 获取所有网卡
+    //qDebug()<<interfaces;
+    for (const QNetworkInterface &iface : interfaces) {
+        if (!iface.flags().testFlag(QNetworkInterface::IsUp) || //是否启用
+            !iface.flags().testFlag(QNetworkInterface::IsRunning) || // 是否运行
+            iface.flags().testFlag(QNetworkInterface::IsLoopBack)) // 是否回环
+            continue; // 遍历后继续
+        macadd = iface.hardwareAddress();// 设置macadd为MAC地址
+        //qInfo()<< macadd << iface.humanReadableName();
+        ui->Mac->setText(macadd + "（" + iface.humanReadableName() + "）"); // 设置UI: Mac地址为macadd变量
+
+        for (const QNetworkAddressEntry &entry : iface.addressEntries()) { // 遍历接口地址
+            QHostAddress ip = entry.ip(); // 获取IP地址
+            if (ip.protocol() == QAbstractSocket::IPv4Protocol) {// 检测是否有V4
+
+                lanv4_add = ip.toString(); // 获取V4字符串
+                ui -> localv4add -> setText(lanv4_add.isEmpty() ? "查询失败喵🐱！" : lanv4_add);// UI：输出V4字符串
+                qCritical() << "请检查网络配置喵🐱，日志如果输出 False 请不要在意" <<lanv4_add.isEmpty();
+
+            } else if (ip.protocol() == QAbstractSocket::IPv6Protocol) {//检测是否有V6
+                if (!ip.toString().startsWith("fe80"))// 屏蔽本地IP地址
+                    lanv6_add = ip.toString(); // 获取V6字符串
+                ui -> localv6add -> setText(lanv6_add.isEmpty() ? "请求失败喵🐱请把鼠标放在我上面喵" : lanv6_add); // UI：输出V6字符串
+                ui -> localv6add -> setToolTip(lanv6_add.isEmpty() ? "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" : lanv6_add);
+                qWarning() << "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" <<lanv6_add.isEmpty();
+            }
+        }
+
+        break; // 业务结束
+    }
 }
 
 /* 菜单栏业务相关定义 */
@@ -190,168 +355,7 @@ void home::help_issueCodeberg_trigger(){
 
 }
 
-/* 刷新按键、首次获取 */
-void home::HomeInfo_Refresh(){
-    qInfo()<<"信息获取/刷新信号已收到，初始化UI并获取信息中";
 
-    ui -> v4add -> setText("Loading......"); // v4地址ui: 初始化
-    ui -> v6add -> setText("Loading......"); // v6地址ui: 初始化
-    ui -> ispinfo -> setText("Loading......"); // isp UI: 初始化
-    ui -> localv4add -> setText("Loading......"); // 局域网V4: UI初始化
-    ui -> localv6add -> setText("Loading......"); // 局域网V6: UI初始化
-    ui -> priority -> setText("Loading......"); // 优先级: UI初始化
 
-    home::getpriority(); // 优先级获取
-    home::getlan(); // 执行本地获取
-    home::getwanv4(); // 执行公网 V4 获取
-    home::getwanv6(); // 执行公网 V6 获取
-    //home::getisp(); // 执行 ISP 获取（已废弃，直接走 wanv4 过后执行异步）
-
-}
-
-// 远程IP、ISP获取
-
-void home::getwanv4() // V4
-{
-    QNetworkAccessManager *v4manager = new QNetworkAccessManager(this); // 设置新的QNAM
-    QNetworkRequest request(QUrl("https://4.ipw.cn")); // 设置Request API为ipw.cn（TODO LIST - 支持多API，并研究出口API）
-    QNetworkReply *v4reply = v4manager->get(request); // 设置Manager操作为request
-    connect(v4reply, &QNetworkReply::finished, this, [this, v4reply]() { // 连接V4 Reply
-
-        if (v4reply->error() == QNetworkReply::NoError) { // 判定是否有错误
-            this->ipv4 = QString(v4reply->readAll()).trimmed(); // 设置IPV4变量为v4返回信息
-            home::getisp(); // 异步执行 ISP，避免 ISP 得不到现在 API 的 ISP 信息变成了奇奇怪怪的信息
-            //qInfo() << "公网 IPv4:" << ipv4; // Qt调试输出信息
-            ui -> v4add -> setText(ipv4); // 显示在UI中
-        } else {
-            QString ipv4_error = v4reply->errorString();
-            qCritical() << "请求失败:" << v4reply->errorString(); // 输出错误信息
-            ui -> v4add -> setText("请求失败🐱，请检查日志🐱"); // 输出错误UI
-        }
-
-        v4reply->deleteLater(); // 从我的内存滚出去😡
-    });
-}
-/*以下代码同理*/
-
-// 获得 V6 公网 IP
-void home::getwanv6()
-{
-    QNetworkAccessManager *v6manager = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("https://6.ipw.cn"));
-    QNetworkReply *v6reply = v6manager->get(request);
-    connect(v6reply, &QNetworkReply::finished, this, [this, v6reply]() {
-
-        if (v6reply->error() == QNetworkReply::NoError) {
-            QString ipv6 = QString(v6reply->readAll()).trimmed();
-            // qInfo() << "公网 IPv6:" << ipv6;
-            ui -> v6add -> setText(ipv6);
-        } else {
-            qCritical() << "请求失败:" << v6reply->errorString();
-            ui -> v6add -> setText("查询失败🐱看看右边有没有输出喵，如果没有请检查日志喵");
-        }
-
-        v6reply->deleteLater();
-
-    });
-}
-
-// 获得 ISP
-void home::getisp() {
-    QNetworkAccessManager *ispget = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("https://cip.cc/"+ this->ipv4));
-    QNetworkReply *ispreply = ispget->get(request);
-    connect(ispreply, &QNetworkReply::finished, this, [this, ispreply]() {
-        if (ispreply->error() == QNetworkReply::NoError) {
-
-            QString replyText = QString::fromUtf8(ispreply->readAll());
-            QString isp;
-
-            static const QRegularExpression regex(R"(数据二\s*:\s*(.*))");// 正则表达式提取
-            QRegularExpressionMatch match = regex.match(replyText);
-
-            if (match.hasMatch()) {
-                isp = match.captured(1).trimmed();
-                ui->ispinfo->setText(isp);
-            } else {
-                isp = "查询不到喵🐱，请检查日志🐱";
-                ui->ispinfo->setText(isp);
-                qWarning() << "查询不到喵：" <<ispreply->errorString();
-            }
-        }else{
-
-            qCritical() << "请求失败喵：" <<ispreply->errorString();
-            ui -> ispinfo -> setText("请求失败喵，请检查日志🐱");
-        }
-
-        ispreply->deleteLater();
-         // 执行优先级获取
-    });
-}
-
-void home::getpriority(){ // 连接优先级
-    QNetworkAccessManager *priorityget = new QNetworkAccessManager(this);
-    QNetworkRequest request(QUrl("https://test.ipw.cn"));
-    QNetworkReply *priorityreply = priorityget->get(request);
-
-    connect(priorityreply, &QNetworkReply::finished, this, [this, priorityreply](){
-        if(priorityreply->error() == QNetworkReply::NoError){
-
-            QString res = QString::fromUtf8(priorityreply->readAll()).trimmed(); // 数据转换（原始字节 -> UTF 9字符串）
-            QString pri;
-            QString prefix_pri = "IP 优先模式："; // pri 输出到 UI 的变量前缀
-            if(res.contains("ipv6",Qt::CaseInsensitive) || res.contains(":")){ // 设置判断标识符 - V6
-                pri="IPv6 优先";
-                qInfo()<<pri;
-
-            } else if(res.contains("ipv4",Qt::CaseInsensitive) || res.contains(".")){ // 回退查询判断标识符 - V6
-                pri="IPv4 优先";
-                qInfo()<<pri;
-
-            } else{ // 回退报错
-                pri="暂时无法查询，请检查网络情况";
-                qWarning() << "暂时无法查询，请检查网络情况喵";
-            }
-
-            ui -> priority -> setText(prefix_pri+pri);
-            priorityreply->deleteLater();
-        }
-    });
-}
-
-// 本地获取（计划增加多网卡支持）
-void home::getlan(){
-    QString lanv4_add, lanv6_add, macadd;
-    const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces(); // 获取所有网卡
-    //qDebug()<<interfaces;
-    for (const QNetworkInterface &iface : interfaces) {
-        if (!iface.flags().testFlag(QNetworkInterface::IsUp) || //是否启用
-            !iface.flags().testFlag(QNetworkInterface::IsRunning) || // 是否运行
-            iface.flags().testFlag(QNetworkInterface::IsLoopBack)) // 是否回环
-            continue; // 遍历后继续
-        macadd = iface.hardwareAddress();// 设置macadd为MAC地址
-        //qInfo()<< macadd << iface.humanReadableName();
-        ui->Mac->setText(macadd + "（" + iface.humanReadableName() + "）"); // 设置UI: Mac地址为macadd变量
-
-        for (const QNetworkAddressEntry &entry : iface.addressEntries()) { // 遍历接口地址
-            QHostAddress ip = entry.ip(); // 获取IP地址
-            if (ip.protocol() == QAbstractSocket::IPv4Protocol) {// 检测是否有V4
-
-                lanv4_add = ip.toString(); // 获取V4字符串
-                ui -> localv4add -> setText(lanv4_add.isEmpty() ? "查询失败喵🐱！" : lanv4_add);// UI：输出V4字符串
-                qCritical() << "请检查网络配置喵🐱，日志如果输出 False 请不要在意" <<lanv4_add.isEmpty();
-
-            } else if (ip.protocol() == QAbstractSocket::IPv6Protocol) {//检测是否有V6
-                if (!ip.toString().startsWith("fe80"))// 屏蔽本地IP地址
-                lanv6_add = ip.toString(); // 获取V6字符串
-                ui -> localv6add -> setText(lanv6_add.isEmpty() ? "请求失败喵🐱请把鼠标放在我上面喵" : lanv6_add); // UI：输出V6字符串
-                ui -> localv6add -> setToolTip(lanv6_add.isEmpty() ? "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" : lanv6_add);
-                qWarning() << "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" <<lanv6_add.isEmpty();
-                }
-            }
-
-            break; // 业务结束
-        }
-    }
 
 
