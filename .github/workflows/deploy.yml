@@ -13,15 +13,15 @@ jobs:
           # Linux Qt 6.5 LTS
           - os: ubuntu-22.04
             qt: 6.5.3
-            artifact: linux-qt65
+            artifact: CipherTools-Linux-qt65
           # Linux Qt 6.10
           - os: ubuntu-24.04
             qt: 6.10.1
-            artifact: linux-qt610
+            artifact: CipherTools-Linux-qt610
           # Windows Qt 6.10
           - os: windows-latest
             qt: 6.10.1
-            artifact: windows-qt610
+            artifact: CipherTools-Windows
 
     runs-on: ${{ matrix.os }}
 
