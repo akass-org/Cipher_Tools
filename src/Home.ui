@@ -74,7 +74,7 @@
       <x>20</x>
       <y>20</y>
       <width>351</width>
-      <height>58</height>
+      <height>87</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_2">
@@ -86,11 +86,26 @@
         </font>
        </property>
        <property name="text">
-        <string>公网 IPv4 地址</string>
+        <string>公网 IP 地址</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0" colspan="2">
+     <item row="2" column="0">
+      <widget class="QLabel" name="v6add">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Loading......</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
       <widget class="QLabel" name="v4add">
        <property name="font">
         <font>
@@ -108,51 +123,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>100</y>
+      <y>110</y>
       <width>351</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QFormLayout" name="formLayout_3">
-     <item row="0" column="0">
-      <widget class="QLabel" name="v6">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>公网 IPv6 地址</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="v6add">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Loading......</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>180</y>
-      <width>351</width>
-      <height>121</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_4">
@@ -194,7 +167,7 @@
       <x>390</x>
       <y>20</y>
       <width>351</width>
-      <height>58</height>
+      <height>81</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -206,7 +179,7 @@
         </font>
        </property>
        <property name="text">
-        <string>本地 IPv4 地址</string>
+        <string>本地 IP 信息</string>
        </property>
       </widget>
      </item>
@@ -222,31 +195,7 @@
        </property>
       </widget>
      </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>390</x>
-      <y>100</y>
-      <width>351</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <layout class="QFormLayout" name="formLayout_5">
-     <item row="0" column="0">
-      <widget class="QLabel" name="localv6">
-       <property name="font">
-        <font>
-         <pointsize>16</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>本地 IPv6 地址</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="localv6add">
        <property name="font">
         <font>
@@ -264,24 +213,12 @@
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>180</y>
+      <y>110</y>
       <width>351</width>
-      <height>121</height>
+      <height>71</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_6">
-     <item row="1" column="0">
-      <widget class="QLabel" name="Mac">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Loading......</string>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QLabel" name="currentMac">
        <property name="font">
@@ -291,6 +228,18 @@
        </property>
        <property name="text">
         <string>当前网卡 MAC 地址</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="Mac">
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Loading......</string>
        </property>
       </widget>
      </item>
@@ -363,9 +312,9 @@
    <widget class="QLabel" name="Version">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>430</x>
       <y>350</y>
-      <width>231</width>
+      <width>341</width>
       <height>20</height>
      </rect>
     </property>

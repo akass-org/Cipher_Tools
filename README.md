@@ -46,10 +46,12 @@ Rana Toolkit 项目[传送门请前往](#rana-toolkit-传送门)<br>
 
 | 开发代号 | 版本号 | 分支状态 |
 | ----- | ----- | ----- |
-| ~~Anno（千早爱音）~~ | ~~0.3.anno.prototype.[builddate]~~ | ~~Prototype，已停止维护~~ |
-| ~~Rana（要乐奈）~~ | ~~0.4.rana.alpha.[builddate]~~ | ~~Alpha-Old，由于炸了Git计划项目分离~~ |
-| **Rana-Re（要乐奈）** | **0.4.rana.alpha.[builddate]** | **Alpha-Re-本体** |
-| **Astra（耀嘉音）** | **0.4_AKTools.astra.alpha.[builddate]** | **Alpha-Re-工具** |
+| Anno（千早爱音） | 0.3.anno.prototype | Prototype，已停止维护 |
+| Rana（要乐奈） | 0.4.rana.alpha.[builddate] | Alpha-Old，由于炸了Git项目分离 |
+| **Rana-Re（要乐奈）** | **CIPHER.rana.alpha.[builddate]** | **Alpha-Re-本体** |
+| **Astra（耀嘉音）** | **RANA.astra.prototype** | **Prototype-Re-工具** |
+| Alice（爱丽丝） | CIPHER.alice.beta.[builddate] | Beta-本体 |
+| Saki（丰川祥子） | RANATOOLKIT.saki.beta.[builddate] | Beta-工具 |
 
 ## Rana Toolkit 传送门
 
