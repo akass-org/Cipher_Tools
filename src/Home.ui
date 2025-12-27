@@ -179,7 +179,7 @@
         </font>
        </property>
        <property name="text">
-        <string>本地 IP 地址</string>
+        <string>本地 IP 信息</string>
        </property>
       </widget>
      </item>
@@ -312,9 +312,9 @@
    <widget class="QLabel" name="Version">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>430</x>
       <y>350</y>
-      <width>231</width>
+      <width>341</width>
       <height>20</height>
      </rect>
     </property>

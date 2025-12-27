@@ -84,7 +84,6 @@ void home::HomeInfo_Refresh(){
     home::getlan(); // 执行本地获取
     home::getwanv4(); // 执行公网 V4 获取
     home::getwanv6(); // 执行公网 V6 获取
-    //home::getisp(); // 执行 ISP 获取（已废弃，直接走 wanv4 过后执行异步）
 
 }
 
@@ -197,6 +196,68 @@ void home::getpriority(){ // 连接优先级
         }
     });
 }
+
+/* 新版本地地址获取，感谢 ChatGPT，注释是我自己写的，目前为 Tree，准备改成扁平
+void home::getlan(){
+    QString lanv4_add, lanv6_add, macadd; // 定义数据变量
+    QString macOut, v4Out, v6Out; // 定义输出变量
+    const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces(); // 获取所有网卡
+    for (const QNetworkInterface &iface : interfaces) { // 开始遍历
+
+        if (!iface.flags().testFlag(QNetworkInterface::IsUp) || // 启用状态
+            !iface.flags().testFlag(QNetworkInterface::IsRunning) || // 运行状态
+             iface.flags().testFlag(QNetworkInterface::IsLoopBack)) // 回环状态
+            continue; // 遍历后继续
+
+        bool headerPrinted = false; // 防止重复输出头
+
+        macadd = iface.hardwareAddress(); // MAC 数据变量
+        macOut += iface.humanReadableName() + "\n"; // MAC 所属设备接口的名字
+        macOut += "  MAC : " + macadd + "\n"; // 最后输出的 MAC 地址
+
+        for (const QNetworkAddressEntry &entry : iface.addressEntries()) {  // 开始 IP 地址的遍历、数据输入
+
+            QHostAddress ip = entry.ip(); // 让 IP 对应接口
+
+            if (ip.protocol() == QAbstractSocket::IPv4Protocol) { 如果是协议是 V4
+
+                lanv4_add = ip.toString(); // V4 地址就给到 lanv4_add 本地v4数据变量下
+
+                if (!headerPrinted) {，如果没输出头（接口名）
+                    v4Out += iface.humanReadableName() + "\n"; // 输出 V4 的变量 = 设备名字 + 换行
+                    headerPrinted = true; // 输出头
+                }
+                v4Out += "  - " + lanv4_add + "\n"; // v4 输出追加为 lanv4_add 的数据
+            }
+
+            else if (ip.protocol() == QAbstractSocket::IPv6Protocol && // 否则如果协议是 v6
+                     !ip.toString().startsWith("fe80")) { // 屏蔽 fe80
+
+                lanv6_add = ip.toString(); // 赋值
+
+                if (!headerPrinted) { // 直接看 V4 的喵！
+                    v6Out += iface.humanReadableName() + "\n";
+                    headerPrinted = true;
+                }
+                v6Out += "  - " + lanv6_add + "\n";
+            }
+        }
+
+        macOut += "\n"; // 追加换行
+        v4Out  += "\n"; // 追加换行
+        v6Out  += "\n"; // 追加换行
+    }
+    ui->Mac->setWordWrap(true);  // UI MAC 地址设置自动换行
+    ui->Mac->setText(macOut); // 设置 MAC UI 为 macOut 变量值
+
+    ui->localv4add->setWordWrap(true); // 看 MAC，按下不表
+    ui->localv4add->setText(v4Out);
+
+    ui->localv6add->setWordWrap(true);
+    ui->localv6add->setText(v6Out);
+
+}
+*/
 
 // 本地获取（计划增加多网卡支持）
 void home::getlan(){
