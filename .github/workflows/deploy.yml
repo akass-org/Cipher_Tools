@@ -34,9 +34,10 @@ jobs:
         
       - name: Install Qt
         uses: jurplel/install-qt-action@v4
-        modules: qtwebengine
         with:
           version: ${{ matrix.qt }}
+          modules: qtwebengine
+          aqtversion: '==3.1.*'
           cache: true
           
       - name: Remove MinGW from PATH
