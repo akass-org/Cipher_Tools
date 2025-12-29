@@ -27,7 +27,7 @@ about::about(QWidget *parent)
     ui->toolversion->setText(AKT_VERSION);//版本信息
     ui->env->setText(systemname.toUpper() + " (" + distro + ")");// 显示系统环境
 
-    connect(ui->aboutqt, &QPushButton::clicked, this, [=]() {
+    connect(ui->qt, &QPushButton::clicked, this, [=]() {
         QMessageBox::aboutQt(this, "关于 Qt");
     }); //打开关于 Qt
 

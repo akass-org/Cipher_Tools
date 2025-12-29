@@ -227,7 +227,7 @@
         </font>
        </property>
        <property name="text">
-        <string>当前网卡 MAC 地址</string>
+        <string>网卡 MAC 地址</string>
        </property>
       </widget>
      </item>
@@ -374,6 +374,7 @@
     <addaction name="wiki"/>
     <addaction name="separator"/>
     <addaction name="blog"/>
+    <addaction name="donate"/>
     <addaction name="repos"/>
     <addaction name="issue"/>
    </widget>
@@ -399,7 +400,6 @@
     </widget>
     <addaction name="MOWeb"/>
     <addaction name="deviceinfo"/>
-    <addaction name="MOQt"/>
     <addaction name="WOL"/>
     <addaction name="track"/>
     <addaction name="NAT"/>
@@ -500,7 +500,7 @@
   </action>
   <action name="MOWeb">
    <property name="text">
-    <string>多出口（基于 Yumeyo 网络综合查询器多出口 Web 版）</string>
+    <string>多出口</string>
    </property>
   </action>
   <action name="deviceinfo">
@@ -562,6 +562,14 @@
   <action name="uplog">
    <property name="text">
     <string>更新日志</string>
+   </property>
+  </action>
+  <action name="donate">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>捐赠</string>
    </property>
   </action>
  </widget>

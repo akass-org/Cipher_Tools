@@ -2,7 +2,7 @@
 #define MULTIOUT_H
 
 #include <QDialog>
-
+#include <QtWebEngineWidgets>
 namespace Ui {
 class MultiOut;
 }

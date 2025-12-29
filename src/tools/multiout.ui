@@ -16,33 +16,29 @@
   <property name="windowTitle">
    <string>多出口检测</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QWebEngineView" name="webEngineView">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>61</width>
-     <height>18</height>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>480</height>
     </rect>
    </property>
-   <property name="text">
-    <string>TextLabel</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>60</y>
-     <width>61</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>TextLabel</string>
+   <property name="url">
+    <url>
+     <string>about:blank</string>
+    </url>
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QtWebEngineWidgets/QWebEngineView</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

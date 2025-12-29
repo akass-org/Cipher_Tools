@@ -11,6 +11,7 @@
 #include "About.h"
 #include "ui_Home.h"
 #include "version.h"
+#include "tools/multiout.h"
 
 home::home(QWidget *parent)
     : QMainWindow(parent)
@@ -47,7 +48,7 @@ home::home(QWidget *parent)
     connect(ui -> issueCodeberg, &QAction::triggered, this, &home::help_issueCodeberg_trigger);// 菜单栏 - 帮助 - 问题反馈：Codeberg
 
     /* 菜单-工具 */
-    connect(ui -> MOWeb, &QAction::triggered, this, &home::Tools_MOWeb_Trigger); // 工具：网页版多出口
+    connect(ui -> MOWeb, &QAction::triggered, this, &home::Tools_MOWeb_Trigger); // 工具：多出口
 
     /*主页：主机名*/
     QString localHostname = QHostInfo::localHostName(); // 主机名实现
@@ -71,6 +72,7 @@ home::~home()
 
 /* 刷新按键、首次获取 */
 void home::HomeInfo_Refresh(){
+
     qInfo()<<"信息获取/刷新信号已收到，初始化UI并获取信息中";
 
     ui -> v4add -> setText("Loading......"); // v4地址ui: 初始化
@@ -80,14 +82,12 @@ void home::HomeInfo_Refresh(){
     ui -> localv6add -> setText("Loading......"); // 局域网V6: UI初始化
     ui -> priority -> setText("Loading......"); // 优先级: UI初始化
 
-    home::getpriority(); // 优先级获取
-    home::getlan(); // 执行本地获取
-    home::getwanv4(); // 执行公网 V4 获取
-    home::getwanv6(); // 执行公网 V6 获取
+    this->getwanv6(); // 执行公网 V6 获取
+    getlan(); // 执行本地获取
+    getwanv4(); // 执行公网 V4 获取
+    getpriority(); // 优先级获取
 
 }
-
-/* 主页功能实现 */
 
 void home::getwanv4() // 公网 IPv4（Public IPv4）
 {
@@ -98,9 +98,9 @@ void home::getwanv4() // 公网 IPv4（Public IPv4）
 
         if (v4reply->error() == QNetworkReply::NoError) { // 判定是否有错误
             this->ipv4 = QString(v4reply->readAll()).trimmed(); // 设置IPV4变量为v4返回信息
-            home::getisp(); // 异步执行 ISP，避免 ISP 得不到现在 API 的 ISP 信息变成了奇奇怪怪的信息
-            //qInfo() << "公网 IPv4:" << ipv4; // Qt调试输出信息
             ui -> v4add -> setText(ipv4); // 显示在UI中
+            if (!ipv4.isEmpty())
+                getisp();
         } else {
             QString ipv4_error = v4reply->errorString();
             qCritical() << "请求失败:" << v4reply->errorString(); // 输出错误信息
@@ -115,6 +115,7 @@ void home::getwanv4() // 公网 IPv4（Public IPv4）
 // 获得 V6 公网 IP
 void home::getwanv6()
 {
+
     QNetworkAccessManager *v6manager = new QNetworkAccessManager(this);
     QNetworkRequest request(QUrl("https://6.ipw.cn"));
     QNetworkReply *v6reply = v6manager->get(request);
@@ -122,7 +123,6 @@ void home::getwanv6()
 
         if (v6reply->error() == QNetworkReply::NoError) {
             QString ipv6 = QString(v6reply->readAll()).trimmed();
-            // qInfo() << "公网 IPv6:" << ipv6;
             ui -> v6add -> setText(ipv6);
         } else {
             qCritical() << "请求失败:" << v6reply->errorString();
@@ -136,6 +136,8 @@ void home::getwanv6()
 
 // 获得 ISP
 void home::getisp() {
+    if (ipv4.isEmpty())
+        return;
     QNetworkAccessManager *ispget = new QNetworkAccessManager(this);
     QNetworkRequest request(QUrl("https://cip.cc/"+ ipv4));
     QNetworkReply *ispreply = ispget->get(request);
@@ -175,20 +177,16 @@ void home::getpriority(){ // 连接优先级
     connect(priorityreply, &QNetworkReply::finished, this, [this, priorityreply](){
         if(priorityreply->error() == QNetworkReply::NoError){
 
-            QString res = QString::fromUtf8(priorityreply->readAll()).trimmed(); // 数据转换（原始字节 -> UTF 9字符串）
+            QString res = QString::fromUtf8(priorityreply->readAll()).trimmed(); // 数据转换（原始字节 -> UTF8 字符串）
             QString pri;
             QString prefix_pri = "IP 优先模式："; // pri 输出到 UI 的变量前缀
-            if(res.contains("ipv6",Qt::CaseInsensitive) || res.contains(":")){ // 设置判断标识符 - V6
-                pri="IPv6 优先";
-                qInfo()<<pri;
-
-            } else if(res.contains("ipv4",Qt::CaseInsensitive) || res.contains(".")){ // 回退查询判断标识符 - V6
-                pri="IPv4 优先";
-                qInfo()<<pri;
-
-            } else{ // 回退报错
-                pri="暂时无法查询，请检查网络情况";
-                qWarning() << "暂时无法查询，请检查网络情况喵";
+            QHostAddress addr(res); // 设置 Qt IP 地址变量 abbr，尝试解析 res（resolve 简写成 res 了） 变量
+            if (addr.protocol() == QAbstractSocket::IPv6Protocol) {
+                pri = "IPv6 优先";
+            } else if (addr.protocol() == QAbstractSocket::IPv4Protocol) {
+                pri = "IPv4 优先";
+            }else{
+                qCritical() << "请求失败:" << priorityreply->errorString();
             }
 
             ui -> priority -> setText(prefix_pri+pri);
@@ -197,69 +195,7 @@ void home::getpriority(){ // 连接优先级
     });
 }
 
-/* 新版本地地址获取，感谢 ChatGPT，注释是我自己写的，目前为 Tree，准备改成扁平
-void home::getlan(){
-    QString lanv4_add, lanv6_add, macadd; // 定义数据变量
-    QString macOut, v4Out, v6Out; // 定义输出变量
-    const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces(); // 获取所有网卡
-    for (const QNetworkInterface &iface : interfaces) { // 开始遍历
-
-        if (!iface.flags().testFlag(QNetworkInterface::IsUp) || // 启用状态
-            !iface.flags().testFlag(QNetworkInterface::IsRunning) || // 运行状态
-             iface.flags().testFlag(QNetworkInterface::IsLoopBack)) // 回环状态
-            continue; // 遍历后继续
-
-        bool headerPrinted = false; // 防止重复输出头
-
-        macadd = iface.hardwareAddress(); // MAC 数据变量
-        macOut += iface.humanReadableName() + "\n"; // MAC 所属设备接口的名字
-        macOut += "  MAC : " + macadd + "\n"; // 最后输出的 MAC 地址
-
-        for (const QNetworkAddressEntry &entry : iface.addressEntries()) {  // 开始 IP 地址的遍历、数据输入
-
-            QHostAddress ip = entry.ip(); // 让 IP 对应接口
-
-            if (ip.protocol() == QAbstractSocket::IPv4Protocol) { 如果是协议是 V4
-
-                lanv4_add = ip.toString(); // V4 地址就给到 lanv4_add 本地v4数据变量下
-
-                if (!headerPrinted) {，如果没输出头（接口名）
-                    v4Out += iface.humanReadableName() + "\n"; // 输出 V4 的变量 = 设备名字 + 换行
-                    headerPrinted = true; // 输出头
-                }
-                v4Out += "  - " + lanv4_add + "\n"; // v4 输出追加为 lanv4_add 的数据
-            }
-
-            else if (ip.protocol() == QAbstractSocket::IPv6Protocol && // 否则如果协议是 v6
-                     !ip.toString().startsWith("fe80")) { // 屏蔽 fe80
-
-                lanv6_add = ip.toString(); // 赋值
-
-                if (!headerPrinted) { // 直接看 V4 的喵！
-                    v6Out += iface.humanReadableName() + "\n";
-                    headerPrinted = true;
-                }
-                v6Out += "  - " + lanv6_add + "\n";
-            }
-        }
-
-        macOut += "\n"; // 追加换行
-        v4Out  += "\n"; // 追加换行
-        v6Out  += "\n"; // 追加换行
-    }
-    ui->Mac->setWordWrap(true);  // UI MAC 地址设置自动换行
-    ui->Mac->setText(macOut); // 设置 MAC UI 为 macOut 变量值
-
-    ui->localv4add->setWordWrap(true); // 看 MAC，按下不表
-    ui->localv4add->setText(v4Out);
-
-    ui->localv6add->setWordWrap(true);
-    ui->localv6add->setText(v6Out);
-
-}
-*/
-
-// 本地获取（计划增加多网卡支持）
+// 本地获取
 void home::getlan(){
     QString lanv4_add, lanv6_add, macadd;
     const QList<QNetworkInterface> interfaces = QNetworkInterface::allInterfaces(); // 获取所有网卡
@@ -290,7 +226,30 @@ void home::getlan(){
             }
         }
 
-        break; // 业务结束
+        QString lanip_tooltip, MAC_tooltip;
+
+        for (const QNetworkInterface &iface : QNetworkInterface::allInterfaces()) {
+
+            lanip_tooltip += "<b>" + iface.humanReadableName() + "</b><br>";
+            MAC_tooltip += "<b>" + iface.humanReadableName() + "</b><br>";
+            MAC_tooltip += "&nbsp;&nbsp;MAC: " + iface.hardwareAddress() + "<br>";
+
+            for (const QNetworkAddressEntry &entry : iface.addressEntries()) {
+                QHostAddress ip = entry.ip();
+
+                if (ip.protocol() == QAbstractSocket::IPv4Protocol) {
+                    lanip_tooltip += "&nbsp;&nbsp;IPv4: " + ip.toString() + "<br>";
+                } else if (ip.protocol() == QAbstractSocket::IPv6Protocol &&
+                           !ip.toString().startsWith("fe80")) {
+                    lanip_tooltip += "&nbsp;&nbsp;IPv6: " + ip.toString() + "<br>";
+                }
+            }
+
+            lanip_tooltip += "<br>";
+        }
+
+        ui->localv4->setToolTip(lanip_tooltip);
+        ui->currentMac->setToolTip(MAC_tooltip);
     }
 }
 
@@ -298,7 +257,7 @@ void home::getlan(){
 
 /* 工具实现 */
 
-/* 多出口在线版 */
+/* 多出口在线版 - 使用 Qt 桌面服务
 void home::Tools_MOWeb_Trigger(){
     qInfo()<<"muti_out_website_trigger";
 
@@ -306,6 +265,18 @@ void home::Tools_MOWeb_Trigger(){
     QDesktopServices::openUrl(MowebUrl);
 
     qDebug() << "桌面服务信号已发出，请检查浏览器 MutiOutWeb";
+}
+*/
+
+/* 多出口在线版 - 使用 Qt Web Engine */
+void home::Tools_MOWeb_Trigger(){
+    qInfo()<<"已触发 MOUT";
+
+    MultiOut *MODialog = new MultiOut(this);   // 加载窗口
+    MODialog->setAttribute(Qt::WA_DeleteOnClose); // 关闭窗口后删除对象
+    MODialog->setModal(false);
+    MODialog->show();
+    qDebug() << "请检查窗口 MutiOutWeb";
 }
 
 

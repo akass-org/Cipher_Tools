@@ -14,9 +14,8 @@ Settings::Settings(QWidget *parent)
     , ui(new Ui::Settings)
 {
     ui->setupUi(this);
-    bool allow_log;
-    //QStringList IP_Conf;
-    //QStringList ISP_Conf;
+    //bool allow_log;
+    //QStringList IP_Conf,ISP_Conf;
 }
 
 Settings::~Settings()
