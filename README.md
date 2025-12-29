@@ -30,11 +30,12 @@ Rana Toolkit 项目[传送门请前往](#rana-toolkit-传送门)<br>
 
 - [X] UI基础布局(Anno)<br>
 - [X] 日志实现(Rana-Re)<br>
-- [ ] 多网卡信息输出实现(Rana-Re)<br>
-- [ ] 多 API 选择实现(Rana-Re)<br>
-- [ ] 路由跳点检测、WOL功能实现(Beta)<br>
-- [ ] NAT 检测、多出口功能实现(Beta)<br>
-- [ ] 设备信息实现(Beta)<br>
+- [X] 多网卡信息输出实现(Rana-Re)<br>
+- [ ] 设置和多 API 可选实现(Rana-Re)
+- [ ] 大陆和海外线同时信息获取(Alice/Saki-Beta)<br>
+- [ ] 路由跳点检测、WOL功能实现(Alice/Saki-Beta)<br>
+- [ ] NAT 检测、DNS 检测实现(Alice/Saki-Beta)<br>
+- [ ] 设备信息实现(Stable)<br>
 - [ ] 全新UI（NXT-Stable）<br>
 - [ ] i18n 支持（NXT-Stable)<br>
 
