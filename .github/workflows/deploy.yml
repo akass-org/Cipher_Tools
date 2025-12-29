@@ -36,7 +36,10 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{ matrix.qt }}
-          modules: qtwebengine
+          modules: >
+            qtwebengine
+            qtwebchannel
+            qtpositioning
           aqtversion: '==3.1.*'
           cache: true
           
