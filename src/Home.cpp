@@ -91,7 +91,7 @@ void home::HomeInfo_Refresh(){
 
 void home::getwanv4() // 公网 IPv4（Public IPv4）
 {
-    QNetworkAccessManager *v4manager = new QNetworkAccessManager(this); // 设置新的QNAM
+    static QNetworkAccessManager *v4manager = new QNetworkAccessManager(this); // 设置新的QNAM
     QNetworkRequest request(QUrl("https://4.ipw.cn")); // 设置Request API为ipw.cn（TODO LIST - 支持多API，并研究出口API）
     QNetworkReply *v4reply = v4manager->get(request); // 设置Manager操作为request
     connect(v4reply, &QNetworkReply::finished, this, [this, v4reply]() { // 连接V4 Reply
@@ -107,7 +107,8 @@ void home::getwanv4() // 公网 IPv4（Public IPv4）
             ui -> v4add -> setText("请求失败🐱，请检查日志🐱"); // 输出错误UI
         }
 
-        v4reply->deleteLater(); // 从我的内存滚出去😡
+        v4reply->abort(); // 终止 v4reply 函数，优化内存泄露
+        v4reply->deleteLater(); // 从我的内存滚出去
     });
 }
 /*以下代码同理*/
@@ -116,7 +117,7 @@ void home::getwanv4() // 公网 IPv4（Public IPv4）
 void home::getwanv6()
 {
 
-    QNetworkAccessManager *v6manager = new QNetworkAccessManager(this);
+    static QNetworkAccessManager *v6manager = new QNetworkAccessManager(this);
     QNetworkRequest request(QUrl("https://6.ipw.cn"));
     QNetworkReply *v6reply = v6manager->get(request);
     connect(v6reply, &QNetworkReply::finished, this, [this, v6reply]() {
@@ -129,6 +130,7 @@ void home::getwanv6()
             ui -> v6add -> setText("查询失败🐱看看右边有没有输出喵，如果没有请检查日志喵");
         }
 
+        v6reply->abort();
         v6reply->deleteLater();
 
     });
@@ -163,14 +165,16 @@ void home::getisp() {
             qCritical() << "请求失败喵：" <<ispreply->errorString();
             ui -> ispinfo -> setText("请求失败喵，请检查日志🐱");
         }
-
+        ispreply->abort();
         ispreply->deleteLater();
-        // 执行优先级获取
     });
+
 }
 
+// 执行优先级获取
+
 void home::getpriority(){ // 连接优先级
-    QNetworkAccessManager *priorityget = new QNetworkAccessManager(this);
+    static QNetworkAccessManager *priorityget = new QNetworkAccessManager(this);
     QNetworkRequest request(QUrl("https://test.ipw.cn"));
     QNetworkReply *priorityreply = priorityget->get(request);
 
@@ -181,18 +185,20 @@ void home::getpriority(){ // 连接优先级
             QString pri;
             QString prefix_pri = "IP 优先模式："; // pri 输出到 UI 的变量前缀
             QHostAddress addr(res); // 设置 Qt IP 地址变量 abbr，尝试解析 res（resolve 简写成 res 了） 变量
-            if (addr.protocol() == QAbstractSocket::IPv6Protocol) {
+            if (addr.protocol() == QAbstractSocket::IPv6Protocol) { // 确认 abbr 是 ipv6，则输出 V6 优先
                 pri = "IPv6 优先";
-            } else if (addr.protocol() == QAbstractSocket::IPv4Protocol) {
+            } else if (addr.protocol() == QAbstractSocket::IPv4Protocol) { // 回退识别是否是 V4
                 pri = "IPv4 优先";
             }else{
                 qCritical() << "请求失败:" << priorityreply->errorString();
             }
 
             ui -> priority -> setText(prefix_pri+pri);
-            priorityreply->deleteLater();
         }
+        priorityreply->abort();
+        priorityreply->deleteLater();
     });
+
 }
 
 // 本地获取
@@ -214,15 +220,22 @@ void home::getlan(){
             if (ip.protocol() == QAbstractSocket::IPv4Protocol) {// 检测是否有V4
 
                 lanv4_add = ip.toString(); // 获取V4字符串
-                ui -> localv4add -> setText(lanv4_add.isEmpty() ? "查询失败喵🐱！" : lanv4_add);// UI：输出V4字符串
-                qCritical() << "请检查网络配置喵🐱，日志如果输出 False 请不要在意" <<lanv4_add.isEmpty();
+                ui -> localv4add -> setText(lanv4_add.isEmpty() ? "查询失败喵🐱！请检查网络配置🐱！" : lanv4_add);// UI：输出V4字符串
+
+                if(lanv4_add.isEmpty()){
+                    qCritical() << "请检查网络配置喵🐱 IPv4" <<lanv4_add.isEmpty();
+                }
 
             } else if (ip.protocol() == QAbstractSocket::IPv6Protocol) {//检测是否有V6
                 if (!ip.toString().startsWith("fe80"))// 屏蔽本地IP地址
                     lanv6_add = ip.toString(); // 获取V6字符串
                 ui -> localv6add -> setText(lanv6_add.isEmpty() ? "请求失败喵🐱请把鼠标放在我上面喵" : lanv6_add); // UI：输出V6字符串
                 ui -> localv6add -> setToolTip(lanv6_add.isEmpty() ? "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" : lanv6_add);
-                qWarning() << "请手动检查IP ADDR/IPCONFIG喵🐱是否存在V6地址喵" <<lanv6_add.isEmpty();
+
+                if(lanv6_add.isEmpty()){
+                    qCritical() << "请检查网络配置喵🐱 IPv6" <<lanv6_add.isEmpty();
+                }
+
             }
         }
 
